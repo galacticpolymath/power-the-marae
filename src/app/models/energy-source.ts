@@ -1,5 +1,5 @@
-import {EnergyCategory, EnergyType} from '@/app/models/energy-types';
-import {EnergyImageLayer} from "@/app/models/energy-image-layer";
+import { EnergyCategory, EnergyType } from '@/app/models/energy-types';
+import { EnergyImageLayer } from '@/app/models/energy-image-layer';
 
 export interface EnergySource {
   key: string;
@@ -11,6 +11,7 @@ export interface EnergySource {
   maxUnitExplanation: string;
   outputType: EnergyType;
   category: EnergyCategory;
+  imageSelector?: string;
   mapSource: string;
   imageLayers: EnergyImageLayer[];
 }

@@ -40,7 +40,7 @@ export class DataCalculator {
           category.userTotal += userSourceConfig.count;
           budgetPercent += category.percentContribution * userSourceConfig.count;
         }
-        if (userSourceConfig.count > sources.maxUnits) {
+        if (userSourceConfig.count >= sources.maxUnits) {
           sourceErrors[sources.key] = sourceErrors[sources.key] || [];
           sourceErrors[sources.key].push(sources.maxUnitExplanation);
         }
@@ -69,9 +69,17 @@ export class DataCalculator {
       .map((source) => {
         const userSourceConfig = userConfiguration[source.key];
         if (userSourceConfig && userSourceConfig.count > 0) {
-          return source.imageLayers
-            .slice(0, Math.min(userSourceConfig.count, source.imageLayers.length))
-            .map((x) => x.src);
+          let maxIndex = Math.min(userSourceConfig.count, source.imageLayers.length);
+          let minIndex = 0;
+          switch (source.imageSelector) {
+            case 'last-by-seven':
+              maxIndex = userSourceConfig.count <= 7 ? 1 : Math.floor(userSourceConfig.count / 7.0);
+              minIndex = Math.max(maxIndex - 1, 0);
+              break;
+            default:
+              break;
+          }
+          return source.imageLayers.slice(minIndex, maxIndex).map((x) => x.src);
         }
         return [];
       })

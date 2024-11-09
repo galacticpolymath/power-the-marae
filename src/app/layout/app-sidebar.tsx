@@ -3,6 +3,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { GameContext } from '@/app/contexts/game-context';
 import { EnergyData } from '@/app/models/energy-data';
 import EnergyEditor from '@/components/energy/energy-editor';
+import { Zap, PiggyBank } from 'lucide-react';
+
 import { Progress } from '@/components/ui/progress';
 import { dataService } from '@/app/services/data-service';
 import { Dialog } from '@radix-ui/react-dialog';
@@ -21,7 +23,7 @@ const AppSidebar = () => {
     setUserEnergyConfiguration({ ...userEnergyConfiguration, [key]: { ...userEnergyConfiguration[key], count } });
   };
 
-  const onOverMax = (key: string) => {
+  const onAtMax = (key: string) => {
     setShowOverMaxDialog(key);
   };
   if (!energyData) {
@@ -42,11 +44,21 @@ const AppSidebar = () => {
           count={userEnergyConfiguration[source.key]?.count || 0}
           sourceKey={source.key}
           onChange={onChangeConfiguration}
-          onOverMax={onOverMax}
+          onAtMax={onAtMax}
         />
       ))}
       <div className="flex flex-col justify-end w-full">
-        <div className="text-xs italic">dollars budget</div>
+        <div className="text-sm italic">
+          <Zap className="inline" size={10} /> &nbsp; energy budget
+        </div>
+        <Progress
+          barColor={totals?.totalPowerKWh >= 30000 ? 'green' : tailWindConfig?.theme?.extend?.colors.primary.DEFAULT}
+          className="w-full"
+          value={Math.min((totals?.totalPowerKWh / 30000) * 100, 100)}
+        />
+        <div className="text-sm italic">
+          <PiggyBank className="inline" size={10} /> &nbsp; dollars budget
+        </div>
         <Progress
           barColor={totals?.budgetExceeded ? 'red' : tailWindConfig?.theme?.extend?.colors.primary.DEFAULT}
           className="w-full"
@@ -67,15 +79,15 @@ const AppSidebar = () => {
             <DialogTitle>
               {energyData.sources.find((x) => x.key === showOverMaxDialog)?.full_name} Limit Reached
             </DialogTitle>
-            <div className="max-h-[80vh] overflow-auto">
-              <pre
+            <div className="max-h-[80vh] overflow-auto pt-2">
+              <p
                 className="whitespace-pre-wrap break-words"
                 dangerouslySetInnerHTML={{
                   __html:
                     (showOverMaxDialog && totals?.sourceErrors[showOverMaxDialog]?.[0]?.replaceAll('\\n', '<br />')) ||
                     '',
                 }}
-              ></pre>
+              ></p>
             </div>
           </DialogHeader>
         </DialogContent>

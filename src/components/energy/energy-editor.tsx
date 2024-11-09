@@ -9,15 +9,15 @@ type EnergyEditorProps = {
   sourceKey: string;
   count: number;
   onChange: (key: string, count: number) => void;
-  onOverMax: (key: string) => void;
+  onAtMax: (key: string) => void;
 };
 
-const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChange, onOverMax }) => {
+const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChange, onAtMax }) => {
   const TypeIcon = source.outputType === 'Electricity' ? Zap : Flame;
-  const isOverMax = count > source.maxUnits;
+  const isAtLimit = count >= source.maxUnits;
   const handleIncrease = () => {
-    if (isOverMax) {
-      onOverMax(sourceKey);
+    if (isAtLimit) {
+      onAtMax(sourceKey);
     } else {
       onChange(sourceKey, count + 1);
     }
@@ -35,12 +35,12 @@ const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChang
         <Button disabled={count === 0} onClick={() => onChange(sourceKey, count - 1)}>
           -
         </Button>
-        <h3 className={clsx('text-xl', { 'text-red-500': isOverMax })}>{count}</h3>
+        <h3 className={clsx('text-xl')}>{count}</h3>
         <Button
-          className={clsx({ 'bg-red-500': isOverMax, 'hover:bg-red-400': isOverMax })}
+          className={clsx({ 'bg-blue-700': isAtLimit, 'hover:bg-blue-500': isAtLimit })}
           onClick={() => handleIncrease()}
         >
-          {isOverMax ? '?' : '+'}
+          {isAtLimit ? '?' : '+'}
         </Button>
       </div>
     </div>

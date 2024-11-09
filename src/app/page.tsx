@@ -18,6 +18,7 @@ export default function Home() {
     budgetPercent: 0,
     errors: [],
     sourceErrors: {},
+    budgetExceeded: false,
   });
   const imagesToRender = useMemo(() => {
     const energySourceImages = dataCalculator.getImagesToRender(energyData, energyConfiguration);
@@ -66,7 +67,6 @@ export default function Home() {
             imagesToRender={imagesToRender}
             className="w-full h-auto"
           />
-          <div style={{ background: 'green', height: '50px', width: '100%' }}></div>
         </div>
       </div>
     </GameContext.Provider>
