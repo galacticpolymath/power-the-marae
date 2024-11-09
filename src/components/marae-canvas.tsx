@@ -1,137 +1,13 @@
-import React, { useRef, useEffect, CanvasHTMLAttributes, useState } from 'react';
+import React, { useRef, useEffect, useState, CanvasHTMLAttributes } from 'react';
 import { LoadingSpinner } from '@/components/spinner';
-
-abstract class Renderable {
-  id: string;
-  isDrawn: boolean;
-  opacity: number;
-
-  constructor(id: string, isDrawn = false, opacity = 1) {
-    this.id = id;
-    this.isDrawn = isDrawn;
-    this.opacity = opacity;
-  }
-
-  abstract render(context: CanvasRenderingContext2D): void;
-}
-
-class RenderableImage extends Renderable {
-  image: HTMLImageElement;
-  highlightImage: HTMLImageElement;
-  isInitial: boolean;
-
-  constructor(id: string, image: HTMLImageElement, highlightImage: HTMLImageElement, isInitial = false) {
-    super(id);
-    this.image = image;
-    this.highlightImage = highlightImage;
-    this.isInitial = isInitial;
-  }
-
-  render(context: CanvasRenderingContext2D) {
-    if (!this.isDrawn) return; // Skip rendering if not marked to be drawn
-
-    const { image, highlightImage, opacity, isInitial } = this;
-    const canvasWidth = context.canvas.clientWidth;
-    const canvasHeight = context.canvas.clientHeight;
-    const canvasAspectRatio = canvasWidth / canvasHeight;
-    const imageAspectRatio = image.width / image.height;
-
-    let renderWidth, renderHeight, offsetX, offsetY;
-
-    if (imageAspectRatio > canvasAspectRatio) {
-      renderWidth = canvasWidth;
-      renderHeight = canvasWidth / imageAspectRatio;
-      offsetX = 0;
-      offsetY = (canvasHeight - renderHeight) / 2;
-    } else {
-      renderWidth = canvasHeight * imageAspectRatio;
-      renderHeight = canvasHeight;
-      offsetX = (canvasWidth - renderWidth) / 2;
-      offsetY = 0;
-    }
-
-    // Draw the base image at full opacity
-    context.globalAlpha = 1;
-    context.drawImage(image, offsetX, offsetY, renderWidth, renderHeight);
-
-    // Only draw the highlight overlay if not an initial image
-    if (!isInitial && opacity > 0) {
-      context.globalAlpha = opacity;
-      context.drawImage(highlightImage, offsetX, offsetY, renderWidth, renderHeight);
-      this.opacity = Math.max(this.opacity - 0.02, 0); // Reduce opacity for fade-out
-    }
-  }
-
-  // Set the image to be drawn, reset opacity for highlight if not an initial image
-  setToDraw() {
-    this.isDrawn = true;
-    if (!this.isInitial) {
-      this.opacity = 1; // Reset opacity for highlight overlay
-    }
-  }
-
-  // Set the image to not be drawn
-  setToNotDraw() {
-    this.isDrawn = false;
-  }
-}
-
-class RenderableCircle extends Renderable {
-  position: { x: number; y: number };
-  radius: number;
-  color: string;
-
-  constructor(id: string, position: { x: number; y: number }, radius: number, color: string, opacity = 1) {
-    super(id, true, opacity);
-    this.position = position;
-    this.radius = radius;
-    this.color = color;
-  }
-
-  render(context: CanvasRenderingContext2D) {
-    const { position, radius, color, opacity } = this;
-
-    context.globalAlpha = opacity;
-    context.beginPath();
-    context.arc(position.x, position.y, radius, 0, Math.PI * 2);
-    context.fillStyle = color;
-    context.fill();
-    context.globalAlpha = 1;
-  }
-}
+import { Renderable } from '@/components/renderables/renderable';
+import { RenderableImage } from '@/components/renderables/renderable-images';
+import { replacePixelsWithColor } from '@/components/renderables/draw-utils';
 
 type CanvasProps = {
   imagesToRender: string[];
   allImages: string[];
 } & CanvasHTMLAttributes<HTMLCanvasElement>;
-
-// Utility to replace non-transparent pixels with a color
-const replacePixelsWithColor = (image: HTMLImageElement, color: number[]): HTMLImageElement => {
-  const canvas = document.createElement('canvas');
-  const context = canvas.getContext('2d');
-  if (!context) return image;
-
-  canvas.width = image.width;
-  canvas.height = image.height;
-  context.drawImage(image, 0, 0);
-
-  const imageData = context.getImageData(0, 0, image.width, image.height);
-  const data = imageData.data;
-
-  for (let i = 0; i < data.length; i += 4) {
-    if (data[i + 3] > 0) {
-      // Non-transparent pixels
-      data[i] = color[0];
-      data[i + 1] = color[1];
-      data[i + 2] = color[2];
-    }
-  }
-
-  context.putImageData(imageData, 0, 0);
-  const coloredImage = new Image();
-  coloredImage.src = canvas.toDataURL();
-  return coloredImage;
-};
 
 const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...other }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -139,7 +15,6 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...othe
   const [isBuffering, setIsBuffering] = useState(true);
   const imageCache = useRef<Record<string, RenderableImage>>({});
 
-  // Preload all images once and initialize RenderableImage objects
   useEffect(() => {
     const preloadImages = async () => {
       const promises = allImages.map(
@@ -152,7 +27,6 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...othe
               image.src = src;
               image.onload = () => {
                 const highlightImage = replacePixelsWithColor(image, [0, 0, 255]);
-                // Mark images in the initial imagesToRender as isInitial
                 const isInitial = imagesToRender.includes(src);
                 const renderableImage = new RenderableImage(src, image, highlightImage, isInitial);
                 renderableImage.isDrawn = isInitial;
@@ -173,15 +47,13 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...othe
     preloadImages();
   }, [allImages, imagesToRender]);
 
-  // Update `isDrawn` state based on `imagesToRender`
   useEffect(() => {
     setRenderables((prevRenderables) =>
       prevRenderables.map((renderable) => {
         if (renderable instanceof RenderableImage) {
-          // Set `isDrawn` and reset opacity only for newly added images
           if (imagesToRender.includes(renderable.id) && !renderable.isDrawn) {
             renderable.setToDraw();
-          } else if (!imagesToRender.includes(renderable.id)) {
+          } else if (!imagesToRender.includes(renderable.id) && renderable.isDrawn) {
             renderable.setToNotDraw();
           }
         }
@@ -225,7 +97,7 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...othe
 
   return (
     <>
-      {isBuffering ? <LoadingSpinner className="w-full h-[50px]" /> : null}
+      {isBuffering && <LoadingSpinner className="w-full h-[50px]" />}
       <canvas ref={canvasRef} width="1920" height="1080" {...other} />
     </>
   );
