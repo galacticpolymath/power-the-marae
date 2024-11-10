@@ -1,3 +1,22 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+    "extends": [
+        "next/core-web-vitals",
+        "next/typescript"
+    ],
+    "rules": {
+        // Disable the original rule and re-add with ignoring underscore
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            // or "error"
+            {
+                "argsIgnorePattern": "^_$",
+                "varsIgnorePattern": "^_$",
+                "caughtErrorsIgnorePattern": "^_$"
+            }
+        ]
+    },
+    "ignorePatterns": [
+        "src/components/ui/**/*.tsx"
+    ]
 }

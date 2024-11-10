@@ -1,7 +1,6 @@
 import React from 'react';
-type HeaderProps = {};
 
-const Header: React.FC<HeaderProps> = () => (
+const Header: React.FC = () => (
   <div className="w-full">
     <h1 className="">Testing</h1>
   </div>

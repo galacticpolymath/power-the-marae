@@ -97,7 +97,11 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, allImages, ...othe
 
   return (
     <>
-      {isBuffering && <LoadingSpinner className="w-full h-[50px]" />}
+      {isBuffering && (
+        <div className="w-full h-[75vh] flex justify-center items-center">
+          <LoadingSpinner className="w-[50px] h-[50px]" />
+        </div>
+      )}
       <canvas ref={canvasRef} width="1920" height="1080" {...other} />
     </>
   );

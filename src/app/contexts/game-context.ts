@@ -15,7 +15,7 @@ export type GameState = {
   regionMatch: EnergyRegion | null;
   setRegionMatch: (region: EnergyRegion | null) => void;
   energyData: EnergyData;
-  calculate: () => void;
+  calculate: (data: EnergyData, config: UserEnergyConfiguration) => void;
   resetSources: () => void;
   totals: CalculatedResponse;
 };

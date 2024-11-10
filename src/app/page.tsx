@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { UserEnergyConfiguration, GameContext } from '@/app/contexts/game-context';
 import { EnergyRegion } from '@/app/models/energy-region';
 import AppSidebar from '@/app/layout/app-sidebar';
@@ -26,12 +26,12 @@ export default function Home() {
   }, [energyConfiguration]);
   const allImages = energyData.sources.map((source) => source.imageLayers.map((layer) => layer.src)).flat();
 
-  const calculate = (data?: EnergyData, config?: UserEnergyConfiguration) => {
-    const calculatedResponse = dataCalculator.calculateTotals(data || energyData, config || energyConfiguration);
+  const calculate = useCallback((data: EnergyData, config: UserEnergyConfiguration) => {
+    const calculatedResponse = dataCalculator.calculateTotals(data, config);
     setTotals(calculatedResponse);
     setTotalPowerKWh(calculatedResponse.totalPowerKWh);
-  };
-  const resetSources = () => {
+  }, []);
+  const resetSources = useCallback(() => {
     const config = energyData.sources.reduce(
       (acc, source) => ({
         ...acc,
@@ -40,10 +40,10 @@ export default function Home() {
       {},
     );
     setEnergyConfiguration(config);
-  };
+  }, [energyData]);
   useEffect(() => {
     calculate(energyData, energyConfiguration);
-  }, [energyData, energyConfiguration]);
+  }, [energyData, energyConfiguration, calculate]);
   return (
     <GameContext.Provider
       value={{

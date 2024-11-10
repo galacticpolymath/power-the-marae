@@ -15,9 +15,10 @@ const AppSidebar = () => {
   const { userEnergyConfiguration, setUserEnergyConfiguration, resetSources, totals } = useContext(GameContext);
   const [energyData, _] = useState<EnergyData>(dataService.getEnergyData());
   const [showOverMaxDialog, setShowOverMaxDialog] = useState<string | null>(null);
+
   useEffect(() => {
     resetSources();
-  }, []);
+  }, [resetSources]);
 
   const onChangeConfiguration = (key: string, count: number) => {
     setUserEnergyConfiguration({ ...userEnergyConfiguration, [key]: { ...userEnergyConfiguration[key], count } });
@@ -49,7 +50,7 @@ const AppSidebar = () => {
       ))}
       <div className="flex flex-col justify-end w-full">
         <div className="text-sm italic">
-          <Zap className="inline" size={10} /> &nbsp; energy budget
+          <Zap className="inline" size={10} /> &nbsp; energy
         </div>
         <Progress
           barColor={totals?.totalPowerKWh >= 30000 ? 'green' : tailWindConfig?.theme?.extend?.colors.primary.DEFAULT}
