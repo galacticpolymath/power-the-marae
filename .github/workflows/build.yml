@@ -1,0 +1,43 @@
+name: 🚀 Build and Deploy to Google Cloud Storage
+
+on:
+  push:
+    branches:
+      - main  # Triggers on push to main branch, adjust if needed
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Use the Node version compatible with your project
+
+      - name: 📦 Install dependencies
+        run: npm install
+
+      - name: 🛠️ Build Next.js app
+        run: npm run build
+
+      - name: 📤 Export static HTML
+        run: npm run export
+
+      - name: 🔑 Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GOOGLE_SERVICE_KEY }}
+
+      - name: 🌐 Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 363.0.0'
+
+      - name: 📂 Deploy to GCS
+        run: |
+          gsutil -m rsync -r ./out gs://${{ secrets.BUCKET_NAME }}
+          gsutil -m acl ch -r -u AllUsers:R gs://${{ secrets.BUCKET_NAME }}
