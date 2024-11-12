@@ -1,6 +1,6 @@
 'use client';
 class PersistedService {
-  setItem(key: string, value: any) {
+  setItem(key: string, value: unknown) {
     if (typeof window === 'undefined' || typeof window.localStorage === 'undefined') {
       return;
     }
