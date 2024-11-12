@@ -67,6 +67,11 @@ const config = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        marae: {
+          blue: '#007AFF',
+          blueHighlight: '#3694f7',
+          gray: '#F3F3F3',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

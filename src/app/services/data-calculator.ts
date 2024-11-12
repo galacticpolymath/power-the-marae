@@ -1,5 +1,6 @@
 import { EnergyData } from '@/app/models/energy-data';
 import { UserEnergyConfiguration } from '@/app/contexts/game-context';
+import { EnergyCircle } from '@/app/models/energy-circle';
 
 const EPSILON = 0.0001;
 export type CalculatedResponse = {
@@ -80,6 +81,21 @@ export class DataCalculator {
               break;
           }
           return source.imageLayers.slice(minIndex, maxIndex).map((x) => x.src);
+        }
+        return [];
+      })
+      .flat();
+  }
+
+  getCircles(
+    energyData: EnergyData,
+    energyConfiguration: UserEnergyConfiguration,
+  ): (EnergyCircle & { color: string })[] {
+    return energyData.sources
+      .map((source) => {
+        const userSourceConfig = energyConfiguration[source.key];
+        if (userSourceConfig && userSourceConfig.count > 0) {
+          return [{ ...source.circle, color: source.color }];
         }
         return [];
       })

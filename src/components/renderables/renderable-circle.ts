@@ -1,25 +1,37 @@
 import { Renderable } from './renderable';
+import { EnergyCircle } from '@/app/models/energy-circle';
 
 export class RenderableCircle extends Renderable {
   position: { x: number; y: number };
   radius: number;
   color: string;
+  currentRadius: number;
 
-  constructor(id: string, position: { x: number; y: number }, radius: number, color: string, opacity = 1) {
-    super(id, true, opacity);
-    this.position = position;
-    this.radius = radius;
-    this.color = color;
+  constructor(energyCircle: EnergyCircle, startingRadius: number = 1, opacity = 0.3) {
+    super(
+      `circle-${energyCircle.center.x}-${energyCircle.center.y}-${energyCircle.radius}-${energyCircle.color}`,
+      true,
+      opacity,
+    );
+    this.position = energyCircle.center;
+    this.radius = energyCircle.radius;
+    this.color = energyCircle.color;
+    this.currentRadius = startingRadius;
   }
 
   render(context: CanvasRenderingContext2D): void {
-    const { position, radius, color, opacity } = this;
+    const { position, currentRadius, radius, color, opacity } = this;
+    const sizeWidth = context.canvas.clientWidth;
+    const sizeHeight = context.canvas.clientHeight;
 
     context.globalAlpha = opacity;
     context.beginPath();
-    context.arc(position.x, position.y, radius, 0, Math.PI * 2);
+    context.arc((position.x / 1920) * sizeWidth, (position.y / 1080) * sizeHeight, currentRadius, 0, Math.PI * 2);
     context.fillStyle = color;
     context.fill();
     context.globalAlpha = 1;
+    if (currentRadius < radius) {
+      this.currentRadius = Math.min(currentRadius + 2, radius);
+    }
   }
 }

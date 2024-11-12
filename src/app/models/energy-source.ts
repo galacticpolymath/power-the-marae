@@ -1,5 +1,6 @@
 import { EnergyCategory, EnergyType } from '@/app/models/energy-types';
 import { EnergyImageLayer } from '@/app/models/energy-image-layer';
+import { EnergyCircle } from '@/app/models/energy-circle';
 
 export interface EnergySource {
   key: string;
@@ -13,5 +14,7 @@ export interface EnergySource {
   category: EnergyCategory;
   imageSelector?: string;
   mapSource: string;
+  color: string;
+  circle: EnergyCircle;
   imageLayers: EnergyImageLayer[];
 }

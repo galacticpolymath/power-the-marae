@@ -46,7 +46,7 @@ export class RenderableImage extends Renderable {
     if (!isInitial && opacity > 0) {
       context.globalAlpha = opacity;
       context.drawImage(highlightImage, offsetX, offsetY, renderWidth, renderHeight);
-      this.opacity = Math.max(this.opacity - 0.02, 0);
+      this.opacity = Math.max(this.opacity - 0.05, 0);
     }
   }
 

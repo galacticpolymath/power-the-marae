@@ -25,7 +25,7 @@ const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChang
   return (
     <div className="w-full flex flex-row justify-between mb-4">
       <div>
-        <h3 className="text-xl mb-1">{source.full_name}</h3>
+        <h3 className="text-xl font-light mb-1">{source.full_name}</h3>
         <h3>
           type: <TypeIcon className="inline" size={12} /> {source.outputType}
         </h3>

@@ -70,10 +70,21 @@
       "outputType": "Electricity",
       "category": "Renewable",
       "mapSource": "River/dairy",
+      "color": "#00A3DB",
+      "circle": {"center":{"x":359,"y":538},"radius":90},
       "imageLayers": [
-        { "order": 1, "src": "/marae/Marae-App_-_0000s_0000_Water-Wheel-1.png" },
-        { "order": 2, "src": "/marae/Marae-App_-_0000s_0001_Water-Wheel-2.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0000s_0002_Water-Wheel-3.png" }
+        {
+          "order": 1,
+          "src": "/marae/Marae-App_-_0000s_0000_Water-Wheel-1.png"
+        },
+        {
+          "order": 2,
+          "src": "/marae/Marae-App_-_0000s_0001_Water-Wheel-2.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0000s_0002_Water-Wheel-3.png"
+        }
       ]
     },
     {
@@ -88,10 +99,21 @@
       "category": "Non-Renewable",
       "mapSource": "Kitchen",
       "imageSelector": "last-by-seven",
+      "color": "#A16847",
+      "circle": {"center":{"x":1152,"y":689},"radius":50},
       "imageLayers": [
-        { "order": 1, "src": "/marae/Marae-App_-_0004s_0002_Gas-1.png" },
-        { "order": 2, "src": "/marae/Marae-App_-_0004s_0001_Gas-2.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0004s_0000_Gas-3.png" }
+        {
+          "order": 1,
+          "src": "/marae/Marae-App_-_0004s_0002_Gas-1.png"
+        },
+        {
+          "order": 2,
+          "src": "/marae/Marae-App_-_0004s_0001_Gas-2.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0004s_0000_Gas-3.png"
+        }
       ]
     },
     {
@@ -105,10 +127,21 @@
       "outputType": "Thermal",
       "category": "Renewable",
       "mapSource": "Living spaces",
+      "color": "#73C69D",
+      "circle": {"center":{"x":799,"y":725},"radius":40},
       "imageLayers": [
-        { "order": 1, "src": "/marae/Marae-App_-_0003s_0000_Thermal-Pipe-1.png" },
-        { "order": 2, "src": "/marae/Marae-App_-_0003s_0001_Thermal-Pipe-2.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0003s_0002_Thermal-Pipe-3.png" }
+        {
+          "order": 1,
+          "src": "/marae/Marae-App_-_0003s_0000_Thermal-Pipe-1.png"
+        },
+        {
+          "order": 2,
+          "src": "/marae/Marae-App_-_0003s_0001_Thermal-Pipe-2.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0003s_0002_Thermal-Pipe-3.png"
+        }
       ]
     },
     {
@@ -122,11 +155,25 @@
       "outputType": "Electricity",
       "category": "Renewable",
       "mapSource": "Sports pitch",
+      "color": "#FFC60C",
+      "circle": {"center":{"x":224,"y":798},"radius":40},
       "imageLayers": [
-        { "order": 1, "src": "/marae/Marae-App_-_0002s_0000_Solar-Panel-1.png" },
-        { "order": 2, "src": "/marae/Marae-App_-_0002s_0001_Solar-Panel-2.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0002s_0002_Solar-Panel-3.png" },
-        { "order": 4, "src": "/marae/Marae-App_-_0002s_0003_Solar-Panel-4.png" }
+        {
+          "order": 1,
+          "src": "/marae/Marae-App_-_0002s_0000_Solar-Panel-1.png"
+        },
+        {
+          "order": 2,
+          "src": "/marae/Marae-App_-_0002s_0001_Solar-Panel-2.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0002s_0002_Solar-Panel-3.png"
+        },
+        {
+          "order": 4,
+          "src": "/marae/Marae-App_-_0002s_0003_Solar-Panel-4.png"
+        }
       ]
     },
     {
@@ -140,11 +187,25 @@
       "outputType": "Electricity",
       "category": "Renewable",
       "mapSource": "Garden",
+      "color": "#B3C0DB",
+      "circle": {"center":{"x":1581,"y":383},"radius":60},
       "imageLayers": [
-        { "order": 1, "src": "/marae/Marae-App_-_0001s_0000_Turbine-1.png" },
-        { "order": 2, "src": "/marae/Marae-App_-_0001s_0001_Turbine-2.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0001s_0002_Turbine-3.png" },
-        { "order": 3, "src": "/marae/Marae-App_-_0001s_0003_Turbine-4.png" }
+        {
+          "order": 1,
+          "src": "/marae/Marae-App_-_0001s_0000_Turbine-1.png"
+        },
+        {
+          "order": 2,
+          "src": "/marae/Marae-App_-_0001s_0001_Turbine-2.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0001s_0002_Turbine-3.png"
+        },
+        {
+          "order": 3,
+          "src": "/marae/Marae-App_-_0001s_0003_Turbine-4.png"
+        }
       ]
     }
   ]
