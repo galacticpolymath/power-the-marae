@@ -7,8 +7,6 @@ import { Zap, PiggyBank, AlertCircle } from 'lucide-react';
 
 import { Progress } from '@/components/ui/progress';
 import { dataService } from '@/app/services/data-service';
-import { Dialog } from '@radix-ui/react-dialog';
-import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import tailWindConfig from '@/../tailwind.config';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import GradientDialog from '@/components/dialog/gradientDialog';

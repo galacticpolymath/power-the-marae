@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, CanvasHTMLAttributes } from 'react';
+import React, { useRef, useEffect, useState, CanvasHTMLAttributes, MouseEvent } from 'react';
 import { LoadingSpinner } from '@/components/spinner';
 import { Renderable } from '@/components/renderables/renderable';
 import { RenderableImage } from '@/components/renderables/renderable-images';
@@ -50,9 +50,9 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
     };
 
     preloadImages();
-  }, [allImages, imagesToRender]);
+  }, [allImages, imagesToRender, renderables]);
 
-  function getCursorPosition(event: any) {
+  function getCursorPosition(event: MouseEvent<HTMLCanvasElement>) {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();

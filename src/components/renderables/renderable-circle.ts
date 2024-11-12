@@ -7,7 +7,7 @@ export class RenderableCircle extends Renderable {
   color: string;
   currentRadius: number;
 
-  constructor(energyCircle: EnergyCircle, startingRadius: number = 1, opacity = 0.3) {
+  constructor(energyCircle: EnergyCircle & { color: string }, startingRadius: number = 1, opacity = 0.3) {
     super(
       `circle-${energyCircle.center.x}-${energyCircle.center.y}-${energyCircle.radius}-${energyCircle.color}`,
       true,

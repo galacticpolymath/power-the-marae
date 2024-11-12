@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { GameContext, UserEnergyConfiguration } from '@/app/contexts/game-context';
 import { EnergyRegion } from '@/app/models/energy-region';
@@ -12,6 +13,47 @@ import MaraeHeader from '@/app/layout/MaraeHeader';
 import GradientDialog from '@/components/dialog/gradientDialog';
 import { Credits } from '@/components/credits';
 import { EnergyCircle } from '@/app/models/energy-circle';
+
+const EnergyMixStackedBar: React.FC<{
+  energyData: EnergyData;
+  energyConfiguration: UserEnergyConfiguration;
+  totalPowerKWh: number;
+}> = ({ energyData, energyConfiguration, totalPowerKWh }) => {
+  return (
+    <div className="flex flex-row w-10/12">
+      {energyData.sources
+        .map((x, i) =>
+          energyConfiguration[x.key].count ? (
+            <div
+              key={x.key}
+              className="flex flex-col"
+              style={{
+                width: `${Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%`,
+              }}
+            >
+              <div
+                className="flex justify-center items-center text-white border-right border-black"
+                style={{
+                  background: x.color,
+                  height: '50px',
+                  borderLeft: '1px solid #000',
+                  borderTop: '1px solid #000',
+                  borderBottom: '1px solid #000',
+                  borderRight: i === energyData.sources.length - 1 ? '1px solid #000' : 'none',
+                }}
+              >
+                {Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%
+              </div>
+              <div className="-rotate-45 w-full flex justify-center mt-10">
+                <span>{x.full_name}</span>
+              </div>
+            </div>
+          ) : null,
+        )
+        .filter((x) => x !== null)}
+    </div>
+  );
+};
 
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
@@ -31,7 +73,7 @@ export default function Home() {
   const imagesToRender = useMemo(() => {
     const energySourceImages = dataCalculator.getImagesToRender(energyData, energyConfiguration);
     return [energyData.scenarioConfiguration.baseImageSrc, ...energySourceImages];
-  }, [energyConfiguration]);
+  }, [energyData, energyConfiguration]);
   const allImages = energyData.sources.map((source) => source.imageLayers.map((layer) => layer.src)).flat();
 
   const calculate = useCallback((data: EnergyData, config: UserEnergyConfiguration) => {
@@ -98,34 +140,11 @@ export default function Home() {
                 </Button>
               )}
               {showEnergyMix && (
-                <div className="flex flex-row w-10/12">
-                  {energyData.sources.map((x, i) => (
-                    <div
-                      key={x.key}
-                      className="flex flex-col"
-                      style={{
-                        width: `${Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%`,
-                      }}
-                    >
-                      <div
-                        className="flex justify-center items-center text-white border-right border-black"
-                        style={{
-                          background: x.color,
-                          height: '50px',
-                          borderLeft: '1px solid #000',
-                          borderTop: '1px solid #000',
-                          borderBottom: '1px solid #000',
-                          borderRight: i === energyData.sources.length - 1 ? '1px solid #000' : 'none',
-                        }}
-                      >
-                        {Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%
-                      </div>
-                      <div className="-rotate-45 w-full flex justify-center mt-10">
-                        <span>{x.full_name}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <EnergyMixStackedBar
+                  energyData={energyData}
+                  energyConfiguration={energyConfiguration}
+                  totalPowerKWh={totalPowerKWh}
+                />
               )}
             </div>
           </div>
@@ -134,7 +153,12 @@ export default function Home() {
               <Button variant="outline" onClick={() => setShowCredits(true)}>
                 credits
               </Button>
-              <img style={{ height: '21px', marginLeft: '2rem' }} src="/galactic_polymath_wm.png" />
+
+              <img
+                alt="Galactic Polymath Logo"
+                style={{ height: '21px', marginLeft: '2rem' }}
+                src="/galactic_polymath_wm.png"
+              />
             </div>
           </div>
         </div>

@@ -3,7 +3,10 @@ name: 🚀 Build and Deploy to Google Cloud Storage
 on:
   push:
     branches:
-      - main  # Triggers on push to main branch, adjust if needed
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
@@ -28,16 +31,19 @@ jobs:
         run: npm run export
 
       - name: 🔑 Authenticate with Google Cloud
+        if: github.event_name == 'push'
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GOOGLE_SERVICE_KEY }}
 
       - name: 🌐 Set up Google Cloud SDK
+        if: github.event_name == 'push'
         uses: google-github-actions/setup-gcloud@v2
         with:
           version: '>= 363.0.0'
 
       - name: 📂 Deploy to GCS
+        if: github.event_name == 'push'
         run: |
           gsutil -m rsync -r ./out gs://${{ secrets.BUCKET_NAME }}
           gsutil -m acl ch -r -u AllUsers:R gs://${{ secrets.BUCKET_NAME }}
