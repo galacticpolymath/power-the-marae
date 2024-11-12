@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import { EnergyRegion } from '@/app/models/energy-region';
 import { EnergyData } from '@/app/models/energy-data';
-import { dataService } from '@/app/services/data-service';
-import { CalculatedResponse } from '@/app/services/data-calculator';
+import { energyDataService } from '@/app/services/energy-data-service';
+import { CalculatedResponse } from '@/app/services/energy-calculation-service';
 
 export type UserEnergyConfiguration = {
   [key: string]: { count: number; label: string };
@@ -18,6 +18,8 @@ export type GameState = {
   calculate: (data: EnergyData, config: UserEnergyConfiguration) => void;
   resetSources: () => void;
   totals: CalculatedResponse;
+  showIntro: boolean;
+  setShowIntro: (showIntro: boolean) => void;
 };
 
 export const GameContext = createContext<GameState>({
@@ -25,11 +27,14 @@ export const GameContext = createContext<GameState>({
   setUserEnergyConfiguration: () => {},
   totalPowerKWh: 0,
   setTotalPowerKWh: () => {},
+  showIntro: true,
+  setShowIntro: () => {},
   regionMatch: null,
   setRegionMatch: () => {},
-  energyData: dataService.getEnergyData(),
+  energyData: energyDataService.getEnergyData(),
   calculate: () => {},
   resetSources: () => {},
+
   totals: {
     totalPowerKWh: 0,
     budgetPercent: 0,

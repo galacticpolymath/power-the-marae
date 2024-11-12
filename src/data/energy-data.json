@@ -58,6 +58,13 @@
       }
     ]
   },
+  "tooltips": [
+    {
+      "text": "Wharenui: The large, communal meeting house at the heart of the marae. A sacred place for celebrations, funerals, and other formal meetings, the wharenui is the ancestral home for Māori people.",
+      "left": "72%",
+      "top": "64%"
+    }
+  ],
   "sources": [
     {
       "key": "Hydro",

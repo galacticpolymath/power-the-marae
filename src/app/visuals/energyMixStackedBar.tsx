@@ -10,35 +10,33 @@ export const EnergyMixStackedBar: React.FC<{
   return (
     <div className="flex flex-row w-10/12">
       {energyData.sources
-        .map((x, i) =>
-          energyConfiguration[x.key].count ? (
+        .filter((x) => energyConfiguration[x.key].count)
+        .map((x, i) => (
+          <div
+            key={x.key}
+            className="flex flex-col"
+            style={{
+              width: `${Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%`,
+            }}
+          >
             <div
-              key={x.key}
-              className="flex flex-col"
+              className="flex justify-center items-center text-white border-right border-black"
               style={{
-                width: `${Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%`,
+                background: x.color,
+                height: '50px',
+                borderLeft: '1px solid #000',
+                borderTop: '1px solid #000',
+                borderBottom: '1px solid #000',
+                borderRight: i === energyData.sources.length - 1 ? '1px solid #000' : 'none',
               }}
             >
-              <div
-                className="flex justify-center items-center text-white border-right border-black"
-                style={{
-                  background: x.color,
-                  height: '50px',
-                  borderLeft: '1px solid #000',
-                  borderTop: '1px solid #000',
-                  borderBottom: '1px solid #000',
-                  borderRight: i === energyData.sources.length - 1 ? '1px solid #000' : 'none',
-                }}
-              >
-                {Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%
-              </div>
-              <div className="-rotate-45 w-full flex justify-center mt-10">
-                <span>{x.full_name}</span>
-              </div>
+              {Math.round(((energyConfiguration[x.key].count * x.unit_kWh) / totalPowerKWh) * 100)}%
             </div>
-          ) : null,
-        )
-        .filter((x) => x !== null)}
+            <div className="-rotate-45 w-full flex justify-center mt-10">
+              <span>{x.full_name}</span>
+            </div>
+          </div>
+        ))}
     </div>
   );
 };

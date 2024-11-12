@@ -1,7 +1,7 @@
 import energyData from '@/data/energy-data.json';
 import { EnergyData } from '@/app/models/energy-data';
 
-class DataService {
+class EnergyDataService {
   getEnergyData(): EnergyData {
     const data = {
       ...energyData,
@@ -18,4 +18,4 @@ class DataService {
   }
 }
 
-export const dataService = new DataService();
+export const energyDataService = new EnergyDataService();

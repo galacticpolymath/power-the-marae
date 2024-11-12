@@ -4,16 +4,18 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { GameContext, UserEnergyConfiguration } from '@/app/contexts/game-context';
 import { EnergyRegion } from '@/app/models/energy-region';
 import AppSidebar from '@/app/layout/app-sidebar';
-import { CalculatedResponse, dataCalculator } from '@/app/services/data-calculator';
-import { dataService } from '@/app/services/data-service';
+import { CalculatedResponse, dataCalculator } from '@/app/services/energy-calculation-service';
+import { energyDataService } from '@/app/services/energy-data-service';
 import MaraeCanvas from '@/components/marae-canvas';
 import { EnergyData } from '@/app/models/energy-data';
 import { Button } from '@/components/ui/button';
-import MaraeHeader from '@/app/layout/MaraeHeader';
+import MaraeHeader from '@/app/layout/marae-header';
 import GradientDialog from '@/components/dialog/gradientDialog';
 import { Credits } from '@/components/credits';
 import { EnergyCircle } from '@/app/models/energy-circle';
 import { EnergyMixStackedBar } from '@/app/visuals/energyMixStackedBar';
+import GameIntroDialog from '@/app/layout/game-intro-dialog';
+import { persistedService } from '@/app/services/persisted-service';
 
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
@@ -22,7 +24,7 @@ export default function Home() {
   const [showCredits, setShowCredits] = useState(false);
   const [circles, setCircles] = useState<(EnergyCircle & { color: string })[]>([]);
   const [showEnergyMix, setShowEnergyMix] = useState(false);
-  const [energyData, _] = useState(dataService.getEnergyData());
+  const [energyData, _] = useState(energyDataService.getEnergyData());
   const [totals, setTotals] = useState<CalculatedResponse>({
     totalPowerKWh: 0,
     budgetPercent: 0,
@@ -30,6 +32,7 @@ export default function Home() {
     sourceErrors: {},
     budgetExceeded: false,
   });
+  const [showIntro, setShowIntro] = useState(persistedService.getItemOrDefault<boolean>('showIntro', true));
   const imagesToRender = useMemo(() => {
     const energySourceImages = dataCalculator.getImagesToRender(energyData, energyConfiguration);
     return [energyData.scenarioConfiguration.baseImageSrc, ...energySourceImages];
@@ -70,6 +73,8 @@ export default function Home() {
         setUserEnergyConfiguration: setEnergyConfiguration,
         totalPowerKWh: totalPowerKWh,
         setTotalPowerKWh: setTotalPowerKWh,
+        showIntro: showIntro,
+        setShowIntro: setShowIntro,
         regionMatch: regionMatch,
         setRegionMatch: setRegionMatch,
         energyData: energyData,
@@ -78,6 +83,13 @@ export default function Home() {
         totals: totals,
       }}
     >
+      <GameIntroDialog
+        open={showIntro}
+        onOpenChange={() => {
+          persistedService.setItem('showIntro', false);
+          setShowIntro(false);
+        }}
+      />
       <div className="container mx-auto flex flex-col md:flex-row">
         <AppSidebar />
         <div className="bg-white w-full flex flex-col h-screen justify-between">

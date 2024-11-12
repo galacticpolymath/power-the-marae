@@ -6,14 +6,16 @@ import EnergyEditor from '@/components/energy/energy-editor';
 import { Zap, PiggyBank, AlertCircle } from 'lucide-react';
 
 import { Progress } from '@/components/ui/progress';
-import { dataService } from '@/app/services/data-service';
+import { energyDataService } from '@/app/services/energy-data-service';
 import tailWindConfig from '@/../tailwind.config';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import GradientDialog from '@/components/dialog/gradientDialog';
+import { persistedService } from '@/app/services/persisted-service';
 
 const AppSidebar = () => {
-  const { userEnergyConfiguration, setUserEnergyConfiguration, resetSources, totals } = useContext(GameContext);
-  const [energyData, _] = useState<EnergyData>(dataService.getEnergyData());
+  const { userEnergyConfiguration, setUserEnergyConfiguration, resetSources, totals, setShowIntro } =
+    useContext(GameContext);
+  const [energyData, _] = useState<EnergyData>(energyDataService.getEnergyData());
   const [showOverMaxDialog, setShowOverMaxDialog] = useState<string | null>(null);
 
   useEffect(() => {
@@ -73,6 +75,15 @@ const AppSidebar = () => {
           className="w-full"
           value={Math.min(totals?.budgetPercent || 0, 1) * 100}
         />
+        <div className="w-full flex justify-end mt-2">
+          <a
+            href="#"
+            className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
+            onClick={() => setShowIntro(true)}
+          >
+            Show Intro Again
+          </a>
+        </div>
         {totals?.errors?.map((error, i) => (
           <Alert variant="destructive" className="mt-3" key={i}>
             <AlertCircle className="h-4 w-4" />

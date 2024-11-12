@@ -24,17 +24,30 @@ export const Credits = () => {
         </a>
         &nbsp; at the University of Canterbury in Christchurch, Aotearoa New Zealand
       </div>
-      <div className="font-semibold">Funded by</div>
+      <div className="font-semibold pt-2">Funded by</div>
       <div>Designed by Madelyn Leembruggen and Matt Wilkins</div>
-      <div className="font-semibold">Creative and cultural consultants</div>
+      <div className="font-semibold pt-2">Creative and cultural consultants</div>
       <div>Mel Tainui, Thomas Hamilton, and Andre Konia</div>
-      <div className="font-semibold">Education consultants</div>
+      <div className="font-semibold pt-2">Education consultants</div>
       <div>Andre Konia, Ella Houlihan</div>
-      <div>
-        <span className="font-semibold">Marae map illustrations</span> by Anna Wilkins
+      <div className="py-2">
+        <span className="font-semibold">Marae map illustrations</span> by&nbsp;
+        <a className="underline hover:no-underline" href="https://www.annamationvisdev.com/" target="_blank">
+          Anna Wilkins
+        </a>
       </div>
-      <div>Māori Background Designs by Ariki Creative</div>
-      <div>Web App Developed by Monkeyjump Labs</div>
+      <div className="py-2">
+        <span className="font-semibold">Māori Background Designs</span> by&nbsp;
+        <a className="underline hover:no-underline" href="https://www.arikicreative.com/" target="_blank">
+          Ariki Creative
+        </a>
+      </div>
+      <div className="py-2">
+        <span className="font-semibold">Web App Developed</span> by&nbsp;
+        <a className="underline hover:no-underline" href="https://www.monkeyjumplabs.com" target="_blank">
+          Monkeyjump Labs
+        </a>
+      </div>
     </>
   );
 };

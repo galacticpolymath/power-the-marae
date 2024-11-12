@@ -25,7 +25,7 @@ const GradientDialog: FC<GradientDialogProps> = ({ open, onOpenChange, title, va
       >
         <Card className="border-black border-2 pt-2">
           <DialogHeader>
-            <DialogTitle className="pl-4">{title}</DialogTitle>
+            <DialogTitle className="pl-4 pb-1">{title}</DialogTitle>
           </DialogHeader>
           <CardContent>{children}</CardContent>
         </Card>

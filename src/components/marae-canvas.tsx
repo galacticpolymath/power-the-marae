@@ -1,10 +1,14 @@
-import React, { useRef, useEffect, useState, CanvasHTMLAttributes, MouseEvent } from 'react';
+import React, { useRef, useEffect, useState, CanvasHTMLAttributes, MouseEvent, useContext } from 'react';
 import { LoadingSpinner } from '@/components/spinner';
 import { Renderable } from '@/components/renderables/renderable';
 import { RenderableImage } from '@/components/renderables/renderable-images';
 import { replacePixelsWithColor } from '@/components/renderables/draw-utils';
 import { EnergyCircle } from '@/app/models/energy-circle';
 import { RenderableCircle } from '@/components/renderables/renderable-circle';
+import { Info } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { GameContext } from '@/app/contexts/game-context';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type CanvasProps = {
   imagesToRender: string[];
@@ -13,6 +17,7 @@ type CanvasProps = {
 } & CanvasHTMLAttributes<HTMLCanvasElement>;
 
 const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages, ...other }) => {
+  const { energyData } = useContext(GameContext);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [renderables, setRenderables] = useState<Renderable[]>([]);
   const [isBuffering, setIsBuffering] = useState(true);
@@ -52,7 +57,10 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
     preloadImages();
   }, [allImages, imagesToRender, renderables]);
 
-  function getCursorPosition(event: MouseEvent<HTMLCanvasElement>) {
+  function getCursorPosition(event: MouseEvent<HTMLDivElement>) {
+    if (!process.env.DEBUG) {
+      return;
+    }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
@@ -66,6 +74,12 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
       radius: 10,
     };
     console.log(`"circle": ${JSON.stringify(circleConfig)},`);
+    console.log(
+      JSON.stringify({
+        left: `${Math.floor((circleConfig.center.x / 1920.0) * 100)}%`,
+        top: `${Math.floor((circleConfig.center.y / 1080.0) * 100)}%`,
+      }),
+    );
   }
 
   useEffect(() => {
@@ -147,7 +161,23 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
           <LoadingSpinner className="w-[50px] h-[50px]" />
         </div>
       )}
-      <canvas onClick={getCursorPosition} ref={canvasRef} width="1920" height="1080" {...other} />
+      <div className="relative">
+        <canvas className="absolute top-0 left-0" ref={canvasRef} width="1920" height="1080" {...other} />
+        <div className="absolute w-full h-full top-0 left-0">
+          <div className="relative w-full h-full" onClick={getCursorPosition}>
+            {energyData.tooltips.map((tip, index) => (
+              <Popover key={index}>
+                <PopoverTrigger style={{ position: 'absolute', left: tip.left, top: tip.top }}>
+                  <Info className="rounded-full bg-white text-cyan-500 hover:bg-cyan-200" />
+                </PopoverTrigger>
+                <PopoverContent className="max-w-[20rem] bg-primary text-secondary">
+                  <p className="text-sm">{tip.text}</p>
+                </PopoverContent>
+              </Popover>
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

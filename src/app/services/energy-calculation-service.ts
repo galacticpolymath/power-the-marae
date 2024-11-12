@@ -10,7 +10,7 @@ export type CalculatedResponse = {
   errors: string[];
   sourceErrors: { [key: string]: string[] };
 };
-export class DataCalculator {
+export class EnergyCalculationService {
   calculateTotals(data: EnergyData, userConfiguration: UserEnergyConfiguration): CalculatedResponse {
     if (!data || !userConfiguration) {
       return {
@@ -103,4 +103,4 @@ export class DataCalculator {
   }
 }
 
-export const dataCalculator = new DataCalculator();
+export const dataCalculator = new EnergyCalculationService();
