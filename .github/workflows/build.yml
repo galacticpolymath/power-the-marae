@@ -43,4 +43,3 @@ jobs:
         if: github.event_name == 'push'
         run: |
           gsutil -m rsync -r ./out gs://${{ secrets.BUCKET_NAME }}
-          gsutil -m acl ch -r -u AllUsers:R gs://${{ secrets.BUCKET_NAME }}
