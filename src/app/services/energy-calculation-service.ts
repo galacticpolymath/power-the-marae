@@ -100,7 +100,10 @@ export class EnergyCalculationService {
       .map((source) => {
         const userSourceConfig = energyConfiguration[source.key];
         if (userSourceConfig && userSourceConfig.count > 0) {
-          return [{ ...source.circle, color: source.color }];
+          const percentMax = userSourceConfig.count / source.maxUnits;
+          return [
+            { ...source.circle, radius: Math.floor(1.5 * source.circle.radius * percentMax), color: source.color },
+          ];
         }
         return [];
       })

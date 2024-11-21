@@ -21,6 +21,7 @@ import EnergyReport from '@/app/visuals/energy-report';
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
   const [totalPowerKWh, setTotalPowerKWh] = useState(0);
+  const [isEdited, setIsEdited] = useState(false);
   const [regionMatch, setRegionMatch] = useState<EnergyRegion | null>(null);
   const [showCredits, setShowCredits] = useState(false);
   const [circles, setCircles] = useState<(EnergyCircle & { color: string })[]>([]);
@@ -55,16 +56,24 @@ export default function Home() {
     );
     setCircles([]);
     setShowEnergyMix(false);
+    setIsEdited(false);
     setEnergyConfiguration(config);
   }, [energyData]);
+
   useEffect(() => {
     calculate(energyData, energyConfiguration);
+    if (showEnergyMix) {
+      const circles = dataCalculator.getCircles(energyData, energyConfiguration);
+      setCircles(circles);
+    }
+    setIsEdited(true);
   }, [energyData, energyConfiguration, calculate]);
 
   const onGeneratePower = () => {
     const circles = dataCalculator.getCircles(energyData, energyConfiguration);
     setCircles(circles);
     setShowEnergyMix(true);
+    setIsEdited(false);
   };
 
   return (
@@ -103,7 +112,7 @@ export default function Home() {
               className="w-full h-auto"
             />
             <div className="w-full flex justify-center mt-4">
-              {!showEnergyMix && (
+              {(!showEnergyMix || isEdited) && (
                 <Button
                   disabled={totalPowerKWh === 0}
                   className="bg-blue-600 hover:bg-blue-500 w-[12rem] h-[3rem] text-xl"
@@ -112,7 +121,7 @@ export default function Home() {
                   Generate Power
                 </Button>
               )}
-              {showEnergyMix && (
+              {showEnergyMix && !isEdited && (
                 <EnergyMixStackedBar
                   energyData={energyData}
                   energyConfiguration={energyConfiguration}
@@ -121,7 +130,9 @@ export default function Home() {
               )}
             </div>
             <div>
-              {showEnergyMix && <EnergyReport energyData={energyData} config={energyConfiguration} totals={totals} />}
+              {showEnergyMix && !isEdited && (
+                <EnergyReport energyData={energyData} config={energyConfiguration} totals={totals} />
+              )}
             </div>
           </div>
           <div className="flex w-full p-8 justify-end">

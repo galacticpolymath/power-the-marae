@@ -95,18 +95,20 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
     setRenderables((prevRenderables) => [
       ...prevRenderables
         .map((renderable) => {
-          if (renderable instanceof RenderableImage) {
+          if (RenderableImage.isOfType(renderable)) {
             if (imagesToRender.includes(renderable.id) && !renderable.isDrawn) {
               renderable.setToDraw();
             } else if (!imagesToRender.includes(renderable.id) && renderable.isDrawn) {
               renderable.setToNotDraw();
             }
           }
-          if (renderable instanceof RenderableCircle) {
+          if (RenderableCircle.isOfType(renderable)) {
             const currentCircles = circles.map((c) => new RenderableCircle(c));
-            if (!currentCircles.some((c) => c.id === renderable.id)) {
+            const matchingNewCircle = currentCircles.find((c) => c.id === renderable.id);
+            if (!matchingNewCircle) {
               return null;
             }
+            renderable.radius = matchingNewCircle.radius;
           }
           return renderable;
         })

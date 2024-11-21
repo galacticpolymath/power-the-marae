@@ -6,13 +6,10 @@ export class RenderableCircle extends Renderable {
   radius: number;
   color: string;
   currentRadius: number;
+  type = 'circle';
 
-  constructor(energyCircle: EnergyCircle & { color: string }, startingRadius: number = 1, opacity = 0.3) {
-    super(
-      `circle-${energyCircle.center.x}-${energyCircle.center.y}-${energyCircle.radius}-${energyCircle.color}`,
-      true,
-      opacity,
-    );
+  constructor(energyCircle: EnergyCircle & { color: string }, startingRadius: number = 1, opacity = 0.4) {
+    super(`circle-${energyCircle.center.x}-${energyCircle.center.y}-${energyCircle.color}`, true, opacity);
     this.position = energyCircle.center;
     this.radius = energyCircle.radius;
     this.color = energyCircle.color;
@@ -33,5 +30,11 @@ export class RenderableCircle extends Renderable {
     if (currentRadius < radius) {
       this.currentRadius = Math.min(currentRadius + 2, radius);
     }
+    if (currentRadius > radius) {
+      this.currentRadius = Math.max(currentRadius - 2, radius);
+    }
+  }
+  static isOfType(obj: Renderable): obj is RenderableCircle {
+    return obj.type === 'circle';
   }
 }

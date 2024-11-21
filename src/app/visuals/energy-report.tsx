@@ -44,7 +44,9 @@ const EnergyReport: FC<EnergyReportProps> = ({ energyData, config, totals }) => 
             <li>Your proposed solution is within budget.</li>
           )}
         </ul>
-        {matchingRegion && <div className="mt-2" dangerouslySetInnerHTML={{ __html: matchingRegion.description }} />}
+        {matchingRegion && (
+          <div className="mt-2 pre-formatted" dangerouslySetInnerHTML={{ __html: matchingRegion.description }} />
+        )}
       </div>
       <div className="w-full flex flex-row justify-end no-print pb-2">
         <Button className="" onClick={() => window.print()}>

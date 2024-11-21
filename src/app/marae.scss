@@ -20,16 +20,10 @@ $image-name-mapping: (
     background-position: center;
   }
 }
-/* styles/print.css */
-@media print {
-  @each $source in $energy-sources {
-    $image-name: if(map.has-key($image-name-mapping, $source), map.get($image-name-mapping, $source), $source);
 
-    .bg-#{$source}-img {
-      background-image: url('/maori_designs/#{$image-name}.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
+.pre-formatted {
+  a {
+    color: #0000FF;
+    text-decoration: underline;
   }
 }

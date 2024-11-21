@@ -4,6 +4,7 @@ export class RenderableImage extends Renderable {
   image: HTMLImageElement;
   highlightImage: HTMLImageElement | null;
   isInitial: boolean;
+  type = 'image';
 
   constructor(id: string, image: HTMLImageElement, highlightImage: HTMLImageElement | null, isInitial = false) {
     super(id);
@@ -61,5 +62,9 @@ export class RenderableImage extends Renderable {
 
   setToNotDraw(): void {
     this.isDrawn = false;
+  }
+
+  static isOfType(obj: Renderable): obj is RenderableImage {
+    return obj.type === 'image';
   }
 }
