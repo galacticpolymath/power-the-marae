@@ -2,47 +2,52 @@
   "regions": [
     {
       "name": "New Zealand",
-      "hydro": 2,
-      "fossil": 6,
-      "geo": 2,
-      "solar": 0,
-      "wind": 0
+      "description": "You found an energy mix similar to New Zealand’s! You chose to rely primarily on hydro units, supplemented by stable energy supplies from geothermal heating and natural gas. This was possible thanks to the river near the marae, and New Zealand’s large amounts of geothermal activity. Maybe you decided that solar and wind power aren’t reliable enough to meet the community’s needs. But given the rising costs of natural gas prices due to their depletion, it might soon be worth investing in a solar array or some wind turbines.\n\nLearn more about New Zealand’s electricity mix <a href=\"https://www.iea.org/countries/new-zealand/electricity\" target=\"_blank\">here</a>.",
+      "Hydro": 2,
+      "Fossil": 6,
+      "Geothermal": 2,
+      "Solar": 0,
+      "Wind": 0
     },
     {
       "name": "United States",
-      "hydro": 1,
-      "fossil": 18,
-      "geo": 0,
-      "solar": 0,
-      "wind": 1
+      "description": "You found an energy mix similar to the United States’! You chose to rely primarily on fossil fuels, but also invested in hydro and wind turbines. In some places it isn’t an option to use geothermal power, but given the rising costs of fossil fuels due to their depletion, it’s probably time to start investing in more renewable energy sources, such as solar arrays or additional hydro and wind power. The United States also uses a significant amount of nuclear power, which is not available to off-grid communities, but provides a lot of power to many nations across the world.\n\nLearn more about the United States’ electricity mix&nbsp;<a href=\"https://www.iea.org/countries/united-states/electricity\" target=\"_blank\">here</a>.",
+      "Hydro": 1,
+      "Fossil": 18,
+      "Geothermal": 0,
+      "Solar": 0,
+      "Wind": 1
     },
     {
       "name": "Germany",
-      "hydro": 0,
-      "fossil": 16,
-      "geo": 0,
-      "solar": 2,
-      "wind": 2
+      "description": "You found an energy mix similar to Germany’s! You chose to rely primarily on fossil fuels, but invested heavily in wind and solar power. In some places it isn’t an option to use geothermal or hydroelectric power. The stability of fossil fuels ensures reliable access to power, even when weather conditions prevent usage of wind or solar power. But given the rising costs of fossil fuels due to their depletion, it’s a good thing you’ve started investing in renewable energy sources.\n\nLearn more about Germany’s electricity mix &nbsp;<a href=\"https://www.iea.org/countries/germany/electricity\" target=\"_blank\">here</a>.",
+      "Hydro": 0,
+      "Fossil": 16,
+      "Geothermal": 0,
+      "Solar": 2,
+      "Wind": 2
     },
     {
       "name": "Chile",
-      "hydro": 1,
-      "fossil": 12,
-      "geo": 0,
-      "solar": 2,
-      "wind": 1
+      "description": "ou found an energy mix similar to Chile’s! You chose to rely more on renewable energy sources than on fossil fuels. In some places it isn’t an option to use geothermal energy. But you diversified your energy mix across hydro, wind, and two solar units. Maybe you hope this diverse mix will provide stability in case of flooding or poor weather conditions. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion. \n\nLearn more about Chile’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/chile/electricity\" target=\"_blank\">here</a>.",
+      "Hydro": 1,
+      "Fossil": 12,
+      "Geothermal": 0,
+      "Solar": 2,
+      "Wind": 1
     },
     {
       "name": "Kenya",
-      "hydro": 1,
-      "fossil": 2,
-      "geo": 4,
-      "solar": 0,
-      "wind": 1
+      "description": "You found an energy mix similar to Kenya’s! You chose to rely primarily on geothermal, hydro, and wind power. You took full advantage of the available geothermal resources, and invested in two other renewable energy sources. Maybe you hope this diverse mix will provide stability in case of flooding or low wind. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion.\n\nLearn more about Kenya’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/kenya/electricity\" target=\"_blank\">here</a>.",
+      "Hydro": 1,
+      "Fossil": 2,
+      "Geothermal": 4,
+      "Solar": 0,
+      "Wind": 1
     }
   ],
   "scenarioConfiguration": {
-    "baseImageSrc": "/marae/Marae-App_-_0001_marae.png",
+    "baseImageSrcs": ["/marae/Marae-App_0003_Color-Layer.png", "/marae/Marae-App_0002_Layer-buildings-colored.png"],
     "categoryRules": [
       {
         "category": "Renewable",
@@ -61,9 +66,18 @@
   "tooltips": [
     {
       "text": "Wharenui: The large, communal meeting house at the heart of the marae. A sacred place for celebrations, funerals, and other formal meetings, the wharenui is the ancestral home for Māori people.",
-      "left": "72%",
-      "top": "64%"
-    }
+      "left": "51%",
+      "top": "81%"
+    },
+    {"text":"Papa Tākaro: A field for playing sports, with a few storage units nearby. The roofs of the storage units are suitable for installing solar panels.", "left":"7%","top":"69%"},
+    {"text":"Urupā: A sacred burial ground.","left":"8%","top":"52%"},
+    {"text":"Whare Witi: A small herd of cattle are kept in this dairy barn by the river. Community members incorporate dairy into their diets, and sell excess dairy products like cheese and butter. ","left":"30%","top":"53%"},
+    {"text":"Awa: A small, but swift, river with a thriving ecosystem. There are three sites along the river that are suitable for hydroelectric turbine units","left":"60%","top":"54%"},
+    {"text":"Hau Manawa: Although the marae is off-the-grid, it can receive deliveries of natural gas. Hot water and heating could be provided by a gas-powered boiler. The stoves and ovens in the communal kitchen are also gas-powered.","left":"57%","top":"64%"},
+    {"text":"Hāpori: Homes of people who live in the area beside the marae. Heating for the homes could be provided by passive geothermal heating units installed underground.","left":"77%","top":"68%"},
+    {"text":"Māra Kai: A well-tended and lush vegetable garden near the communal kitchen. Members of the marae care for the garden and share its produce across the community. There are rows of drying racks nearby, used to preserve kai moana (seafood such as eel and fish) by dehydrating it in the sun.","left":"89%","top":"78%"},
+    {"text":"Kāuta: This communal kitchen is used by tangata whenua (home people) to prepare kai (food) for guests. Nearby is the wharekai (dining room), used to welcome the community and guests for informal gatherings. Whare people sit, eat, and whakawhanaungatanga (connect, share stories, and enjoy each others’ company)","left":"71%","top":"78%"},
+    {"text":"Kapohau: This field is suitable for several small wind turbines.","left":"79%","top":"36%"}
   ],
   "sources": [
     {
@@ -78,19 +92,22 @@
       "category": "Renewable",
       "mapSource": "River/dairy",
       "color": "#00A3DB",
-      "circle": {"center":{"x":359,"y":538},"radius":90},
+      "circle": {"center":{"x":359,"y":538},"radius":135},
       "imageLayers": [
         {
           "order": 1,
-          "src": "/marae/Marae-App_-_0000s_0000_Water-Wheel-1.png"
+          "src": "/marae/Marae-App_0000s_0000_Water-Wheel-Clean-1.png",
+          "highlightSrc": "/marae/Marae-App_0000s_0001_Water-Wheel-Highlight-1.png"
         },
         {
           "order": 2,
-          "src": "/marae/Marae-App_-_0000s_0001_Water-Wheel-2.png"
+          "src": "/marae/Marae-App_0000s_0002_Water-Wheel-Clean-2.png",
+          "highlightSrc": "/marae/Marae-App_0000s_0003_Water-Wheel-Highlight-2.png"
         },
         {
           "order": 3,
-          "src": "/marae/Marae-App_-_0000s_0002_Water-Wheel-3.png"
+          "src": "/marae/Marae-App_0000s_0004_Water-Wheel-Clean-3.png",
+          "highlightSrc": "/marae/Marae-App_0000s_0005_Water-Wheel-Highlight-3.png"
         }
       ]
     },
@@ -107,19 +124,22 @@
       "mapSource": "Kitchen",
       "imageSelector": "last-by-seven",
       "color": "#A16847",
-      "circle": {"center":{"x":1152,"y":689},"radius":50},
+      "circle": {"center":{"x":1152,"y":689},"radius":75},
       "imageLayers": [
         {
           "order": 1,
-          "src": "/marae/Marae-App_-_0004s_0002_Gas-1.png"
+          "src": "/marae/Marae-App_0004s_0004_Gas-Clean-1.png",
+          "highlightSrc": "/marae/Marae-App_0004s_0005_Highlight-Gas-1.png"
         },
         {
           "order": 2,
-          "src": "/marae/Marae-App_-_0004s_0001_Gas-2.png"
+          "src": "/marae/Marae-App_0004s_0002_Gas-Clean-2.png",
+          "highlightSrc": "/marae/Marae-App_0004s_0003_Highlight-Gas-2.png"
         },
         {
           "order": 3,
-          "src": "/marae/Marae-App_-_0004s_0000_Gas-3.png"
+          "src": "/marae/Marae-App_0004s_0000_Gas-Clean-3.png",
+          "highlightSrc": "/marae/Marae-App_0004s_0001_Highlight-Gas-3.png"
         }
       ]
     },
@@ -135,19 +155,22 @@
       "category": "Renewable",
       "mapSource": "Living spaces",
       "color": "#73C69D",
-      "circle": {"center":{"x":799,"y":725},"radius":40},
+      "circle": {"center":{"x":799,"y":725},"radius":60},
       "imageLayers": [
         {
           "order": 1,
-          "src": "/marae/Marae-App_-_0003s_0000_Thermal-Pipe-1.png"
+          "src": "/marae/Marae-App_0003s_0000_Thermal-Pipe-Clean-1.png",
+          "highlightSrc": "/marae/Marae-App_0003s_0001_Highlight-Thermal-Pipe-1.png"
         },
         {
           "order": 2,
-          "src": "/marae/Marae-App_-_0003s_0001_Thermal-Pipe-2.png"
+          "src": "/marae/Marae-App_0003s_0002_Thermal-Pipe-Clean-2.png",
+          "highlightSrc": "/marae/Marae-App_0003s_0003_Highlight-Thermal-Pipe-2.png"
         },
         {
           "order": 3,
-          "src": "/marae/Marae-App_-_0003s_0002_Thermal-Pipe-3.png"
+          "src": "/marae/Marae-App_0003s_0004_Thermal-Pipe-Clean-3.png",
+          "highlightSrc": "/marae/Marae-App_0003s_0005_Highlight-Thermal-Pipe-3.png"
         }
       ]
     },
@@ -163,23 +186,27 @@
       "category": "Renewable",
       "mapSource": "Sports pitch",
       "color": "#FFC60C",
-      "circle": {"center":{"x":224,"y":798},"radius":40},
+      "circle": {"center":{"x":224,"y":798},"radius":60},
       "imageLayers": [
         {
           "order": 1,
-          "src": "/marae/Marae-App_-_0002s_0000_Solar-Panel-1.png"
+          "src": "/marae/Marae-App_0002s_0000_Solar-Panel-Clean-1.png",
+          "highlightSrc": "/marae/Marae-App_0002s_0001_Highlight-Solar-Panel-1.png"
         },
         {
           "order": 2,
-          "src": "/marae/Marae-App_-_0002s_0001_Solar-Panel-2.png"
+          "src": "/marae/Marae-App_0002s_0002_Solar-Panel-Clean-2.png",
+          "highlightSrc": "/marae/Marae-App_0002s_0003_Highlight-Solar-Panel-2.png"
         },
         {
           "order": 3,
-          "src": "/marae/Marae-App_-_0002s_0002_Solar-Panel-3.png"
+          "src": "/marae/Marae-App_0002s_0004_Solar-Panel-Clean-3.png",
+          "highlightSrc": "/marae/Marae-App_0002s_0005_Highlight-Solar-Panel-3.png"
         },
         {
           "order": 4,
-          "src": "/marae/Marae-App_-_0002s_0003_Solar-Panel-4.png"
+          "src": "/marae/Marae-App_0002s_0006_Solar-Panel-Clean-4.png",
+          "highlightSrc": "/marae/Marae-App_0002s_0007_Highlight-Solar-Panel-4.png"
         }
       ]
     },
@@ -195,23 +222,27 @@
       "category": "Renewable",
       "mapSource": "Garden",
       "color": "#B3C0DB",
-      "circle": {"center":{"x":1581,"y":383},"radius":60},
+      "circle": {"center":{"x":1581,"y":383},"radius":90},
       "imageLayers": [
         {
           "order": 1,
-          "src": "/marae/Marae-App_-_0001s_0000_Turbine-1.png"
+          "src": "/marae/Marae-App_0001s_0000_Turbine-1.png",
+          "highlightSrc": "/marae/Marae-App_0001s_0001_Highlight-Turbine-1.png"
         },
         {
           "order": 2,
-          "src": "/marae/Marae-App_-_0001s_0001_Turbine-2.png"
+          "src": "/marae/Marae-App_0001s_0002_Turbine-2.png",
+          "highlightSrc": "/marae/Marae-App_0001s_0003_Highlight-Turbine-2.png"
         },
         {
           "order": 3,
-          "src": "/marae/Marae-App_-_0001s_0002_Turbine-3.png"
+          "src": "/marae/Marae-App_0001s_0004_Turbine-3.png",
+          "highlightSrc": "/marae/Marae-App_0001s_0005_Highlight-Turbine-3.png"
         },
         {
-          "order": 3,
-          "src": "/marae/Marae-App_-_0001s_0003_Turbine-4.png"
+          "order": 4,
+          "src": "/marae/Marae-App_0001s_0006_Turbine-4.png",
+          "highlightSrc": "/marae/Marae-App_0001s_0007_Highlight-Turbine-4.png"
         }
       ]
     }

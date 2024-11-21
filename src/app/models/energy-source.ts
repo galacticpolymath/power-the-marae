@@ -1,9 +1,10 @@
 import { EnergyCategory, EnergyType } from '@/app/models/energy-types';
 import { EnergyImageLayer } from '@/app/models/energy-image-layer';
 import { EnergyCircle } from '@/app/models/energy-circle';
+import { EnergySourceKey } from '@/app/models/energy-source-key';
 
 export interface EnergySource {
-  key: string;
+  key: EnergySourceKey;
   full_name: string;
   description: string;
   unit_kWh: number;

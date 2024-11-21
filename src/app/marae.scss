@@ -1,0 +1,35 @@
+@use "sass:map";
+
+$energy-sources: geothermal, fossil, solar, hydro, wind;
+
+$image-name-mapping: (
+        "fossil": "natural-gas",
+        "hydro": "water"
+);
+
+@each $source in $energy-sources {
+  $image-name: if(map.has-key($image-name-mapping, $source), map.get($image-name-mapping, $source), $source);
+
+  .bg-#{$source}-img {
+    background-image: image-set(
+                    url('/maori_designs/#{$image-name}.png') 1x,
+                    url('/maori_designs/#{$image-name}@2x.png') 2x
+    ) !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+}
+/* styles/print.css */
+@media print {
+  @each $source in $energy-sources {
+    $image-name: if(map.has-key($image-name-mapping, $source), map.get($image-name-mapping, $source), $source);
+
+    .bg-#{$source}-img {
+      background-image: url('/maori_designs/#{$image-name}.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  }
+}

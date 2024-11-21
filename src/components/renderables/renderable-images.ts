@@ -2,10 +2,10 @@ import { Renderable } from './renderable';
 
 export class RenderableImage extends Renderable {
   image: HTMLImageElement;
-  highlightImage: HTMLImageElement;
+  highlightImage: HTMLImageElement | null;
   isInitial: boolean;
 
-  constructor(id: string, image: HTMLImageElement, highlightImage: HTMLImageElement, isInitial = false) {
+  constructor(id: string, image: HTMLImageElement, highlightImage: HTMLImageElement | null, isInitial = false) {
     super(id);
     this.image = image;
     this.highlightImage = highlightImage;
@@ -38,16 +38,16 @@ export class RenderableImage extends Renderable {
       offsetY = 0;
     }
 
-    // Draw the base image
-    context.globalAlpha = 1;
-    context.drawImage(image, offsetX, offsetY, renderWidth, renderHeight);
-
-    // Draw the highlight overlay if needed
-    if (!isInitial && opacity > 0) {
+    // Draw the highlight background if it exists
+    if (highlightImage !== null && !isInitial && opacity > 0) {
       context.globalAlpha = opacity;
       context.drawImage(highlightImage, offsetX, offsetY, renderWidth, renderHeight);
-      this.opacity = Math.max(this.opacity - 0.05, 0);
+      this.opacity = Math.max(this.opacity - 0.03, 0);
     }
+
+    // Draw the image
+    context.globalAlpha = 1;
+    context.drawImage(image, offsetX, offsetY, renderWidth, renderHeight);
   }
 
   setToDraw(): void {

@@ -10,6 +10,10 @@ export type CalculatedResponse = {
   errors: string[];
   sourceErrors: { [key: string]: string[] };
 };
+export type HighlightableImage = {
+  src: string;
+  highlightSrc?: string;
+};
 export class EnergyCalculationService {
   calculateTotals(data: EnergyData, userConfiguration: UserEnergyConfiguration): CalculatedResponse {
     if (!data || !userConfiguration) {
@@ -61,8 +65,7 @@ export class EnergyCalculationService {
       budgetExceeded,
     };
   }
-
-  getImagesToRender(data: EnergyData, userConfiguration: UserEnergyConfiguration): string[] {
+  getImagesToRender(data: EnergyData, userConfiguration: UserEnergyConfiguration): HighlightableImage[] {
     if (!data || !userConfiguration) {
       return [];
     }
@@ -80,7 +83,9 @@ export class EnergyCalculationService {
             default:
               break;
           }
-          return source.imageLayers.slice(minIndex, maxIndex).map((x) => x.src);
+          return source.imageLayers
+            .slice(minIndex, maxIndex)
+            .map((x) => ({ src: x.src, highlightSrc: x.highlightSrc }));
         }
         return [];
       })

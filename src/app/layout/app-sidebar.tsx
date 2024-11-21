@@ -33,7 +33,7 @@ const AppSidebar = () => {
     return;
   }
   return (
-    <div className="bg-gray-100 h-auto md:h-screen w-full md:w-1/4 min-w-96 px-4 pt-4 pb-8 flex flex-col">
+    <div className="no-print bg-gray-100 h-auto md:h-screen w-full md:w-1/4 min-w-96 px-4 pt-4 pb-8 flex flex-col">
       <div className="flex flex-row justify-between items-end pb-2">
         <div className="text-xl">Energy Sources</div>
         <div className="text-xl">Quantity</div>

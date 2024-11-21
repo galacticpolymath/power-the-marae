@@ -24,12 +24,15 @@ const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChang
   };
   return (
     <div className="w-full flex flex-row justify-between mb-4">
-      <div>
-        <h3 className="text-xl font-light mb-1">{source.full_name}</h3>
-        <h3>
-          type: <TypeIcon className="inline" size={12} /> {source.outputType}
-        </h3>
-        <h3>unit power: {source.unit_kWh.toLocaleString()} kWh</h3>
+      <div className="flex flex-row items-center">
+        <div className="h-[88%] w-[12px] mr-3" style={{ background: source.color }}></div>
+        <div>
+          <h3 className="text-xl font-light mb-1">{source.full_name}</h3>
+          <h3>
+            type: <TypeIcon className="inline" size={12} /> {source.outputType}
+          </h3>
+          <h3>unit power: {source.unit_kWh.toLocaleString()} kWh</h3>
+        </div>
       </div>
       <div className="flex flex-row justify-between items-center w-32">
         <Button disabled={count === 0} onClick={() => onChange(sourceKey, count - 1)}>

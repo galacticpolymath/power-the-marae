@@ -1,8 +1,8 @@
-export interface EnergyRegion {
+import { EnergySourceKey } from '@/app/models/energy-source-key';
+
+export type EnergyRegion = {
+  [key in EnergySourceKey]: number;
+} & {
   name: string;
-  hydro: number;
-  fossil: number;
-  geo: number;
-  solar: number;
-  wind: number;
-}
+  description: string;
+};

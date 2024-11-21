@@ -1,3 +1,4 @@
+@import './marae.scss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -79,4 +80,17 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* styles/print.css */
+@media print {
+  #stacked-bar {
+    print-color-adjust: exact;
+  }
+
+  /* Hide elements that shouldn't be printed */
+  .no-print {
+    display: none;
+  }
+
 }

@@ -7,12 +7,14 @@ import { EnergyCircle } from '@/app/models/energy-circle';
 import { RenderableCircle } from '@/components/renderables/renderable-circle';
 import { Info } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Confetti from 'react-confetti';
 import { GameContext } from '@/app/contexts/game-context';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { HighlightableImage } from '@/app/services/energy-calculation-service';
 
 type CanvasProps = {
   imagesToRender: string[];
-  allImages: string[];
+  allImages: HighlightableImage[];
   circles: (EnergyCircle & { color: string })[];
 } & CanvasHTMLAttributes<HTMLCanvasElement>;
 
@@ -26,19 +28,25 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
   useEffect(() => {
     const preloadImages = async () => {
       const promises = allImages.map(
-        (src) =>
+        (x) =>
           new Promise<void>((resolve) => {
-            if (imageCache.current[src]) {
+            if (imageCache.current[x.src]) {
               resolve();
             } else {
               const image = new Image();
-              image.src = src;
+              image.src = x.src;
               image.onload = () => {
-                const highlightImage = replacePixelsWithColor(image, [0, 0, 255]);
-                const isInitial = imagesToRender.includes(src);
-                const renderableImage = new RenderableImage(src, image, highlightImage, isInitial);
+                const highlightImage = new Image();
+                highlightImage.src = x.highlightSrc || '';
+                const isInitial = imagesToRender.includes(x.src);
+                const renderableImage = new RenderableImage(
+                  x.src,
+                  image,
+                  x.highlightSrc ? highlightImage : null,
+                  isInitial,
+                );
                 renderableImage.isDrawn = isInitial;
-                imageCache.current[src] = renderableImage;
+                imageCache.current[x.src] = renderableImage;
                 resolve();
               };
               image.onerror = () => resolve();
@@ -57,10 +65,10 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
     preloadImages();
   }, [allImages, imagesToRender, renderables]);
 
-  function getCursorPosition(event: MouseEvent<HTMLDivElement>) {
-    if (!process.env.DEBUG) {
-      return;
-    }
+  function getCursorPosition(event: MouseEvent<HTMLElement>) {
+    // if (!process.env.DEBUG) {
+    //   return;
+    // }
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
@@ -76,6 +84,7 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
     console.log(`"circle": ${JSON.stringify(circleConfig)},`);
     console.log(
       JSON.stringify({
+        text: '',
         left: `${Math.floor((circleConfig.center.x / 1920.0) * 100)}%`,
         top: `${Math.floor((circleConfig.center.y / 1080.0) * 100)}%`,
       }),
@@ -162,7 +171,14 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
         </div>
       )}
       <div className="relative">
-        <canvas className="absolute top-0 left-0" ref={canvasRef} width="1920" height="1080" {...other} />
+        <canvas
+          id="mainCanvas"
+          className="absolute top-0 left-0"
+          ref={canvasRef}
+          width="1920"
+          height="1080"
+          {...other}
+        />
         <div className="absolute w-full h-full top-0 left-0">
           <div className="relative w-full h-full" onClick={getCursorPosition}>
             {energyData.tooltips.map((tip, index) => (

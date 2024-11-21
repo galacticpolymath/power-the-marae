@@ -13,9 +13,10 @@ import MaraeHeader from '@/app/layout/marae-header';
 import GradientDialog from '@/components/dialog/gradientDialog';
 import { Credits } from '@/components/credits';
 import { EnergyCircle } from '@/app/models/energy-circle';
-import { EnergyMixStackedBar } from '@/app/visuals/energyMixStackedBar';
+import { EnergyMixStackedBar } from '@/app/visuals/energy-mix-stacked-bar';
 import GameIntroDialog from '@/app/layout/game-intro-dialog';
 import { persistedService } from '@/app/services/persisted-service';
+import EnergyReport from '@/app/visuals/energy-report';
 
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
@@ -35,9 +36,9 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(persistedService.getItemOrDefault<boolean>('showIntro', true));
   const imagesToRender = useMemo(() => {
     const energySourceImages = dataCalculator.getImagesToRender(energyData, energyConfiguration);
-    return [energyData.scenarioConfiguration.baseImageSrc, ...energySourceImages];
+    return [...energyData.scenarioConfiguration.baseImageSrcs, ...energySourceImages.map((x) => x.src)];
   }, [energyData, energyConfiguration]);
-  const allImages = energyData.sources.map((source) => source.imageLayers.map((layer) => layer.src)).flat();
+  const allImages = energyData.sources.map((source) => source.imageLayers.map((layer) => layer)).flat();
 
   const calculate = useCallback((data: EnergyData, config: UserEnergyConfiguration) => {
     const calculatedResponse = dataCalculator.calculateTotals(data, config);
@@ -96,7 +97,7 @@ export default function Home() {
           <div className="w-full flex flex-col">
             <MaraeHeader />
             <MaraeCanvas
-              allImages={[energyData.scenarioConfiguration.baseImageSrc, ...allImages]}
+              allImages={[...energyData.scenarioConfiguration.baseImageSrcs.map((x) => ({ src: x })), ...allImages]}
               imagesToRender={imagesToRender}
               circles={circles}
               className="w-full h-auto"
@@ -118,6 +119,9 @@ export default function Home() {
                   totalPowerKWh={totalPowerKWh}
                 />
               )}
+            </div>
+            <div>
+              {showEnergyMix && <EnergyReport energyData={energyData} config={energyConfiguration} totals={totals} />}
             </div>
           </div>
           <div className="flex w-full p-8 justify-end">
