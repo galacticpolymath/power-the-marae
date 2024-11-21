@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { Flame, Zap } from 'lucide-react';
+import { Flame, Info, Zap } from 'lucide-react';
 import { EnergySource } from '@/app/models/energy-source';
 import { Button } from '@/components/ui/button';
 import { clsx } from 'clsx';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 type EnergyEditorProps = {
   source: EnergySource;
@@ -27,7 +28,23 @@ const EnergyEditor: FC<EnergyEditorProps> = ({ source, sourceKey, count, onChang
       <div className="flex flex-row items-center">
         <div className="h-[88%] w-[12px] mr-3" style={{ background: source.color }}></div>
         <div>
-          <h3 className="text-xl font-light mb-1">{source.full_name}</h3>
+          <h3 className="text-xl font-light mb-1">
+            {source.full_name}{' '}
+            <Popover>
+              <PopoverTrigger className="inline">
+                <Info size={15} className="rounded-full bg-white text-cyan-500 hover:bg-cyan-200 ml-1" />
+              </PopoverTrigger>
+              <PopoverContent className="max-w-[50rem] bg-primary text-secondary w-[40rem]">
+                <p
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{
+                    __html: source.maxUnitExplanation?.replaceAll('\n', '<br />').replaceAll('\\n', '<br />'),
+                  }}
+                />
+              </PopoverContent>
+            </Popover>
+          </h3>
+
           <h3>
             type: <TypeIcon className="inline" size={12} /> {source.outputType}
           </h3>

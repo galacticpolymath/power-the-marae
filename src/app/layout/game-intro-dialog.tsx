@@ -152,154 +152,162 @@ const GameIntroDialog: React.FC<GameIntroDialogProps> = ({ open, onOpenChange })
 
   return (
     <Dialog open={open || false} onOpenChange={onOpenChange}>
-      <DialogContent
-        className={'sm:max-w-[75vw] border-none px-6 pt-8 pb-6 h-[80%]'}
-        style={{
-          background: "url('/maori_designs/intro-background_Ariki-Creative.png') no-repeat center / cover",
-        }}
-      >
+      <DialogContent className={'sm:max-w-[75vw] border-none h-[80%]  px-8 pb-8'} style={{ background: '#191919' }}>
         <DialogHeader className="hidden">
           <DialogTitle className="pl-4 pb-1">Welcome to Punahiko Marae!</DialogTitle>
         </DialogHeader>
-
-        {currentVideo ? (
-          <div className="w-full h-full pb-20 pt-4 px-4 bg-secondary rounded-sm">
-            <iframe className="w-full h-full" src={currentVideo.url} allowFullScreen></iframe>
-            <Button className="mt-4" onClick={() => setCurrentVideo(null)}>
-              Back
-            </Button>
-          </div>
-        ) : (
-          <Card className={clsx('border-black border-2 pt-2 min-h-[50%] my-auto mx-auto max-w-[80%]')}>
-            <CardContent>
-              <Carousel setApi={setApi} className="w-full max-w-[40rem]">
-                <CarouselContent>
-                  <CarouselItem>
-                    <div className="flex flex-col h-full justify-between">
-                      <MaraeHeader />
-                      <div className="w-full flex flex-grow justify-end items-end mt-4">
-                        <Button variant="default" onClick={() => api?.scrollNext()}>
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="flex flex-col h-full justify-between">
-                      <div className="flex flex-col items-center">
-                        <h1 className="text-4xl font-semibold">Nau mai haere mai!</h1>
-                        <h1 className="text-2xl font-light italic">Welcome!</h1>
-                      </div>
-                      <br />
-                      <div className="text-lg">
-                        This app puts you in charge of meeting the energy needs of Punahiko Marae, a fictional community
-                        inspired by real Māori efforts to generate their own power in Aotearoa New Zealand.
-                      </div>
-                      <br />
-                      <div>
-                        <span className="font-bold">
-                          Your goal: pick a mix of power sources to provide an annual energy budget of 30,000 kWh
-                        </span>
-                        &nbsp;(kilowatt-hours, a unit of energy).
-                      </div>
-                      <br />
-                      <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
-                        <Button variant="default" onClick={() => api?.scrollPrev()}>
-                          Back
-                        </Button>
-                        <Button variant="default" onClick={() => api?.scrollNext()}>
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-
-                  <CarouselItem>
-                    <div className="flex flex-col w-full">
-                      <h1 className="text-3xl font-light">
-                        Learn more about Māori marae and the search for energy independence
-                      </h1>
-                      {videos.map((video, index) => (
-                        <div key={index} className="flex flex-row items-center justify-between w-full">
-                          <div>{video.description}</div>
-                          <div
-                            className="cursor-pointer mb-4 flex justify-center relative items-center align-middle"
-                            onClick={() => setCurrentVideo(video)}
-                          >
-                            <img className="m-w-40 max-w-40 h-auto" alt={video.description} src={video.thumbnail}></img>
-                            <PlayIcon className="absolute w-10 h-10 mx-auto text-white" />
+        <div className="relative w-full h-full" style={{ background: '#191919' }}>
+          <div
+            className="border-none h-full w-full relative flex align-middle"
+            style={{
+              background: "url('/maori_designs/intro-background_Ariki-Creative.png') no-repeat center / cover",
+            }}
+          >
+            {currentVideo ? (
+              <div className="w-full h-full pb-20 pt-4 px-4 bg-secondary rounded-sm">
+                <iframe className="w-full h-full" src={currentVideo.url} allowFullScreen></iframe>
+                <Button className="mt-4" onClick={() => setCurrentVideo(null)}>
+                  Back
+                </Button>
+              </div>
+            ) : (
+              <Card className={clsx('border-black border-2 pt-2 min-h-[50%] my-auto mx-auto max-w-[80%] relative')}>
+                <CardContent className="w-full h-full flex justify-center">
+                  <Carousel setApi={setApi} className="max-w-[600px]">
+                    <CarouselContent>
+                      <CarouselItem>
+                        <div className="flex flex-col h-full justify-between align-middle relative">
+                          <MaraeHeader />
+                          <div className="w-full flex flex-grow justify-end items-end mt-4">
+                            <Button variant="default" onClick={() => api?.scrollNext()}>
+                              Next
+                            </Button>
                           </div>
                         </div>
-                      ))}
-                      <div className="w-full flex flex-grow justify-between mt-4 relative pr-4">
-                        <Button variant="default" onClick={() => api?.scrollPrev()}>
-                          Back
-                        </Button>
-                        <Button variant="default" onClick={() => api?.scrollNext()}>
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="flex flex-col h-full justify-between">
-                      <PowerDescription api={api} />
-                      <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
-                        <Button variant="default" onClick={() => api?.scrollPrev()}>
-                          Back
-                        </Button>
-                        <Button variant="default" onClick={() => api?.scrollNext()}>
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="flex flex-col h-full justify-between">
-                      <PowerDescription api={api} showMaxDisclaimer />
-                      <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
-                        <Button variant="default" onClick={() => api?.scrollPrev()}>
-                          Back
-                        </Button>
-                        <Button variant="default" onClick={() => api?.scrollNext()}>
-                          Next
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="flex flex-col h-full justify-between">
-                      <div className="flex flex-col items-center">
-                        <h1 className="text-4xl font-semibold">Kia rite!</h1>
-                        <h1 className="text-2xl font-light italic">Get ready!</h1>
-                      </div>
-                      <div className="text-3xl font-bold mt-4 ml-4">
-                        <ul className="list-disc pl-4">
-                          <li>1. Pick your power mix</li>
-                          <li>Click Generate</li>
-                          <li>See your results</li>
-                          <li>Continue Exploring!</li>
-                        </ul>
-                      </div>
-                      <div className="italic text-lg mt-4">
-                        Tip: click the <InfoIcon className="inline" size={16} /> icon to learn more about each power
-                        source.
-                      </div>
-                      <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
-                        <Button variant="default" onClick={() => api?.scrollPrev()}>
-                          Back
-                        </Button>
-                        <Button variant="default" onClick={() => handleOpenChange?.()}>
-                          Start
-                        </Button>
-                      </div>
-                    </div>
-                  </CarouselItem>
-                </CarouselContent>
-              </Carousel>
-            </CardContent>
-          </Card>
-        )}
+                      </CarouselItem>
+                      <CarouselItem>
+                        <div className="flex flex-col justify-between h-full">
+                          <div className="flex flex-col items-center">
+                            <h1 className="text-4xl font-semibold">Nau mai haere mai!</h1>
+                            <h1 className="text-2xl font-light italic">Welcome!</h1>
+                          </div>
+                          <div className="text-lg">
+                            This app puts you in charge of meeting the energy needs of Punahiko Marae, a fictional
+                            community inspired by real Māori efforts to generate their own power in Aotearoa New
+                            Zealand.
+                          </div>
+                          <div>
+                            <span className="font-bold">
+                              Your goal: pick a mix of power sources to provide an annual energy budget of 30,000 kWh
+                            </span>
+                            &nbsp;(kilowatt-hours, a unit of energy).
+                          </div>
+                          <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
+                            <Button variant="default" onClick={() => api?.scrollPrev()}>
+                              Back
+                            </Button>
+                            <Button variant="default" onClick={() => api?.scrollNext()}>
+                              Next
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+
+                      <CarouselItem>
+                        <div className="flex flex-col w-full">
+                          <h1 className="text-3xl font-light">
+                            Learn more about Māori marae and the search for energy independence
+                          </h1>
+                          {videos.map((video, index) => (
+                            <div key={index} className="flex flex-row items-center justify-between w-full">
+                              <div>{video.description}</div>
+                              <div
+                                className="cursor-pointer mb-4 flex justify-center relative items-center align-middle"
+                                onClick={() => setCurrentVideo(video)}
+                              >
+                                <img
+                                  className="m-w-40 max-w-40 h-auto"
+                                  alt={video.description}
+                                  src={video.thumbnail}
+                                ></img>
+                                <PlayIcon className="absolute w-10 h-10 mx-auto text-white" />
+                              </div>
+                            </div>
+                          ))}
+                          <div className="w-full flex flex-grow justify-between mt-4 relative pr-4">
+                            <Button variant="default" onClick={() => api?.scrollPrev()}>
+                              Back
+                            </Button>
+                            <Button variant="default" onClick={() => api?.scrollNext()}>
+                              Next
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                      <CarouselItem>
+                        <div className="flex flex-col h-full justify-between">
+                          <PowerDescription api={api} />
+                          <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
+                            <Button variant="default" onClick={() => api?.scrollPrev()}>
+                              Back
+                            </Button>
+                            <Button variant="default" onClick={() => api?.scrollNext()}>
+                              Next
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                      <CarouselItem>
+                        <div className="flex flex-col h-full justify-between">
+                          <PowerDescription api={api} showMaxDisclaimer />
+                          <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
+                            <Button variant="default" onClick={() => api?.scrollPrev()}>
+                              Back
+                            </Button>
+                            <Button variant="default" onClick={() => api?.scrollNext()}>
+                              Next
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                      <CarouselItem>
+                        <div className="flex flex-col h-full justify-between">
+                          <div className="flex flex-col items-center">
+                            <h1 className="text-4xl font-semibold">Kia rite!</h1>
+                            <h1 className="text-2xl font-light italic">Get ready!</h1>
+                          </div>
+                          <div className="text-xl font-bold mt-4 ml-4">
+                            <ul className="pl-4">
+                              <li>1. Pick your power mix</li>
+                              <li>2. Click Generate</li>
+                              <li>3. See your results</li>
+                              <li>4. Continue Exploring!</li>
+                            </ul>
+                          </div>
+                          <div className="italic text-lg mt-4">
+                            Tip: click the <InfoIcon className="inline" size={16} /> icon to learn more about each power
+                            source.
+                          </div>
+                          <div className="w-full flex justify-between flex-grow items-end mt-4 relative pr-4">
+                            <Button variant="default" onClick={() => api?.scrollPrev()}>
+                              Back
+                            </Button>
+                            <Button variant="default" onClick={() => handleOpenChange?.()}>
+                              Start
+                            </Button>
+                          </div>
+                        </div>
+                      </CarouselItem>
+                    </CarouselContent>
+                  </Carousel>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+        <div className="absolute bottom-1 right-8 text-white" style={{ background: '#191919' }}>
+          <img src="/galactic_polymath_wm_white.png" style={{ height: '24px' }}></img>
+        </div>
       </DialogContent>
     </Dialog>
   );

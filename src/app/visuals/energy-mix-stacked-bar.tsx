@@ -9,7 +9,7 @@ export const EnergyMixStackedBar: React.FC<{
 }> = ({ energyData, energyConfiguration, totalPowerKWh }) => {
   const presentSources = energyData.sources.filter((x) => energyConfiguration[x.key].count > 0);
   return (
-    <div id="stacked-bar" className="flex flex-row w-10/12">
+    <div id="stacked-bar" className="flex flex-row w-full">
       {presentSources.map((x, i) => (
         <div
           key={x.key}

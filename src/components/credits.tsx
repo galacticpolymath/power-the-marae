@@ -13,8 +13,11 @@ export const Credits = () => {
           Powerful Solutions
         </a>
         &quot; Unit for middle and high school. This unit introduces students to chemical and process engineering
-        mindsets related to energy production, through an indigenous Māori lens. It was developed by Galactic Polymath
-        Education Studio and &nbsp;
+        mindsets related to energy production, through an indigenous Māori lens. It was developed by{' '}
+        <a className="underline hover:no-underline" href=" https://www.galacticpolymath.com/" target="_blank">
+          Galactic Polymath
+        </a>
+        &nbsp; Education Studio and &nbsp;
         <a
           className="underline hover:no-underline"
           href="https://profiles.canterbury.ac.nz/Matthew-Cowan"

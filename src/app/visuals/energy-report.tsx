@@ -47,6 +47,15 @@ const EnergyReport: FC<EnergyReportProps> = ({ energyData, config, totals }) => 
         {matchingRegion && (
           <div className="mt-2 pre-formatted" dangerouslySetInnerHTML={{ __html: matchingRegion.description }} />
         )}
+        {!matchingRegion && (
+          <div className="mt-2">
+            What an interesting solution you’ve found!{' '}
+            <a className="underline hover:no-underline" href="https://www.iea.org/countries" target="_blank">
+              Explore the International Energy Agency’s website
+            </a>{' '}
+            to find out what country has an energy mix most similar to yours!
+          </div>
+        )}
       </div>
       <div className="w-full flex flex-row justify-end no-print pb-2">
         <Button className="" onClick={() => window.print()}>

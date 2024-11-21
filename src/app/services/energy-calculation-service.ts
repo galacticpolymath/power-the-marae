@@ -77,7 +77,10 @@ export class EnergyCalculationService {
           let minIndex = 0;
           switch (source.imageSelector) {
             case 'last-by-seven':
-              maxIndex = userSourceConfig.count <= 7 ? 1 : Math.floor(userSourceConfig.count / 7.0);
+              maxIndex =
+                userSourceConfig.count <= 6
+                  ? 1
+                  : Math.min(Math.floor(userSourceConfig.count / 7.0 + 1), source.imageLayers.length);
               minIndex = Math.max(maxIndex - 1, 0);
               break;
             default:

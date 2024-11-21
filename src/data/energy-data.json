@@ -2,7 +2,7 @@
   "regions": [
     {
       "name": "New Zealand",
-      "description": "You found an energy mix similar to New Zealand’s! You chose to rely primarily on hydro units, supplemented by stable energy supplies from geothermal heating and natural gas. This was possible thanks to the river near the marae, and New Zealand’s large amounts of geothermal activity. Maybe you decided that solar and wind power aren’t reliable enough to meet the community’s needs. But given the rising costs of natural gas prices due to their depletion, it might soon be worth investing in a solar array or some wind turbines.\n\nLearn more about New Zealand’s electricity mix <a href=\"https://www.iea.org/countries/new-zealand/electricity\" target=\"_blank\">here</a>.",
+      "description": "You found an energy mix similar to 🇳🇿 Aotearoa New Zealand’s! You chose to rely primarily on hydro units, supplemented by stable energy supplies from geothermal heating and natural gas. This was possible thanks to the river near the marae, and New Zealand’s large amounts of geothermal activity. Maybe you decided that solar and wind power aren’t reliable enough to meet the community’s needs. But given the rising costs of natural gas prices due to their depletion, it might soon be worth investing in a solar array or some wind turbines.\n\nLearn more about New Zealand’s electricity mix <a href=\"https://www.iea.org/countries/new-zealand/electricity\" target=\"_blank\">here</a>.",
       "Hydro": 2,
       "Fossil": 6,
       "Geothermal": 2,
@@ -11,7 +11,7 @@
     },
     {
       "name": "United States",
-      "description": "You found an energy mix similar to the United States’! You chose to rely primarily on fossil fuels, but also invested in hydro and wind turbines. In some places it isn’t an option to use geothermal power, but given the rising costs of fossil fuels due to their depletion, it’s probably time to start investing in more renewable energy sources, such as solar arrays or additional hydro and wind power. The United States also uses a significant amount of nuclear power, which is not available to off-grid communities, but provides a lot of power to many nations across the world.\n\nLearn more about the United States’ electricity mix&nbsp;<a href=\"https://www.iea.org/countries/united-states/electricity\" target=\"_blank\">here</a>.",
+      "description": "You found an energy mix similar to the 🇺🇸 United States’! You chose to rely primarily on fossil fuels, but also invested in hydro and wind turbines. In some places it isn’t an option to use geothermal power, but given the rising costs of fossil fuels due to their depletion, it’s probably time to start investing in more renewable energy sources, such as solar arrays or additional hydro and wind power. The United States also uses a significant amount of nuclear power, which is not available to off-grid communities, but provides a lot of power to many nations across the world.\n\nLearn more about the United States’ electricity mix&nbsp;<a href=\"https://www.iea.org/countries/united-states/electricity\" target=\"_blank\">here</a>.",
       "Hydro": 1,
       "Fossil": 18,
       "Geothermal": 0,
@@ -20,7 +20,7 @@
     },
     {
       "name": "Germany",
-      "description": "You found an energy mix similar to Germany’s! You chose to rely primarily on fossil fuels, but invested heavily in wind and solar power. In some places it isn’t an option to use geothermal or hydroelectric power. The stability of fossil fuels ensures reliable access to power, even when weather conditions prevent usage of wind or solar power. But given the rising costs of fossil fuels due to their depletion, it’s a good thing you’ve started investing in renewable energy sources.\n\nLearn more about Germany’s electricity mix &nbsp;<a href=\"https://www.iea.org/countries/germany/electricity\" target=\"_blank\">here</a>.",
+      "description": "You found an energy mix similar to 🇩🇪 Germany’s! You chose to rely primarily on fossil fuels, but invested heavily in wind and solar power. In some places it isn’t an option to use geothermal or hydroelectric power. The stability of fossil fuels ensures reliable access to power, even when weather conditions prevent usage of wind or solar power. But given the rising costs of fossil fuels due to their depletion, it’s a good thing you’ve started investing in renewable energy sources.\n\nLearn more about Germany’s electricity mix &nbsp;<a href=\"https://www.iea.org/countries/germany/electricity\" target=\"_blank\">here</a>.",
       "Hydro": 0,
       "Fossil": 16,
       "Geothermal": 0,
@@ -29,7 +29,7 @@
     },
     {
       "name": "Chile",
-      "description": "ou found an energy mix similar to Chile’s! You chose to rely more on renewable energy sources than on fossil fuels. In some places it isn’t an option to use geothermal energy. But you diversified your energy mix across hydro, wind, and two solar units. Maybe you hope this diverse mix will provide stability in case of flooding or poor weather conditions. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion. \n\nLearn more about Chile’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/chile/electricity\" target=\"_blank\">here</a>.",
+      "description": "You found an energy mix similar to 🇨🇱 Chile’s! You chose to rely more on renewable energy sources than on fossil fuels. In some places it isn’t an option to use geothermal energy. But you diversified your energy mix across hydro, wind, and two solar units. Maybe you hope this diverse mix will provide stability in case of flooding or poor weather conditions. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion. \n\nLearn more about Chile’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/chile/electricity\" target=\"_blank\">here</a>.",
       "Hydro": 1,
       "Fossil": 12,
       "Geothermal": 0,
@@ -38,16 +38,21 @@
     },
     {
       "name": "Kenya",
-      "description": "You found an energy mix similar to Kenya’s! You chose to rely primarily on geothermal, hydro, and wind power. You took full advantage of the available geothermal resources, and invested in two other renewable energy sources. Maybe you hope this diverse mix will provide stability in case of flooding or low wind. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion.\n\nLearn more about Kenya’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/kenya/electricity\" target=\"_blank\">here</a>.",
+      "description": "You found an energy mix similar to 🇰🇪 Kenya’s! You chose to rely primarily on geothermal, hydro, and wind power. You took full advantage of the available geothermal resources, and invested in two other renewable energy sources. Maybe you hope this diverse mix will provide stability in case of flooding or low wind. It takes a lot of research and money to invest broadly in renewable energy sources. In fact, this solution is outside your community’s budget. But it has significantly reduced your reliance on fossil fuels, which are increasing in costs due to their depletion.\n\nLearn more about Kenya’s electricity mix&nbsp;<a href=\"https://www.iea.org/countries/kenya/electricity\" target=\"_blank\">here</a>.",
       "Hydro": 1,
-      "Fossil": 2,
-      "Geothermal": 4,
+      "Fossil": 6,
+      "Geothermal": 3,
       "Solar": 0,
       "Wind": 1
     }
   ],
   "scenarioConfiguration": {
-    "baseImageSrcs": ["/marae/Marae-App_0003_Color-Layer.png", "/marae/Marae-App_0002_Layer-buildings-colored.png"],
+    "baseImageSrcs": [
+      "/marae/Marae-App_0003_Color-Layer.png",
+      "/marae/Marae-App_0002_Layer-buildings-colored.png",
+      "/marae/Marae-App_0001_Māori-Clean.png",
+      "/marae/Marae-App_0000_Clouds-Clean.png"
+    ],
     "categoryRules": [
       {
         "category": "Renewable",
@@ -58,7 +63,7 @@
       {
         "category": "Non-Renewable",
         "maxUnits": 22,
-        "percentContribution": 0.01143,
+        "percentContribution": 0.0067,
         "exceedMaximumError": "You have exceeded the maximum number of non-renewable energy sources. Please remove a source before adding another."
       }
     ]
@@ -69,15 +74,15 @@
       "left": "51%",
       "top": "81%"
     },
-    {"text":"Papa Tākaro: A field for playing sports, with a few storage units nearby. The roofs of the storage units are suitable for installing solar panels.", "left":"7%","top":"69%"},
-    {"text":"Urupā: A sacred burial ground.","left":"8%","top":"52%"},
-    {"text":"Whare Witi: A small herd of cattle are kept in this dairy barn by the river. Community members incorporate dairy into their diets, and sell excess dairy products like cheese and butter. ","left":"30%","top":"53%"},
-    {"text":"Awa: A small, but swift, river with a thriving ecosystem. There are three sites along the river that are suitable for hydroelectric turbine units","left":"60%","top":"54%"},
-    {"text":"Hau Manawa: Although the marae is off-the-grid, it can receive deliveries of natural gas. Hot water and heating could be provided by a gas-powered boiler. The stoves and ovens in the communal kitchen are also gas-powered.","left":"57%","top":"64%"},
-    {"text":"Hāpori: Homes of people who live in the area beside the marae. Heating for the homes could be provided by passive geothermal heating units installed underground.","left":"77%","top":"68%"},
-    {"text":"Māra Kai: A well-tended and lush vegetable garden near the communal kitchen. Members of the marae care for the garden and share its produce across the community. There are rows of drying racks nearby, used to preserve kai moana (seafood such as eel and fish) by dehydrating it in the sun.","left":"89%","top":"78%"},
-    {"text":"Kāuta: This communal kitchen is used by tangata whenua (home people) to prepare kai (food) for guests. Nearby is the wharekai (dining room), used to welcome the community and guests for informal gatherings. Whare people sit, eat, and whakawhanaungatanga (connect, share stories, and enjoy each others’ company)","left":"71%","top":"78%"},
-    {"text":"Kapohau: This field is suitable for several small wind turbines.","left":"79%","top":"36%"}
+    {"text":"<b><em>Papa Tākaro</em></b>: A field for playing sports, with a few storage units nearby. The roofs of the storage units are suitable for installing solar panels.", "left":"7%","top":"69%"},
+    {"text":"<b><em>Urupā</em></b>: A sacred burial ground.","left":"8%","top":"52%"},
+    {"text":"<b><em>Whare Witi</em></b>: A small herd of cattle are kept in this dairy barn by the river. Community members incorporate dairy into their diets, and sell excess dairy products like cheese and butter. ","left":"30%","top":"53%"},
+    {"text":"<b><em>Awa</em></b>: A small, but swift, river with a thriving ecosystem. There are three sites along the river that are suitable for hydroelectric turbine units","left":"60%","top":"54%"},
+    {"text":"<b><em>Hau Manawa</em></b>: Although the marae is off-the-grid, it can receive deliveries of natural gas. Hot water and heating could be provided by a gas-powered boiler. The stoves and ovens in the communal kitchen are also gas-powered.","left":"57%","top":"64%"},
+    {"text":"<b><em>Hāpori</em></b>: Homes of people who live in the area beside the marae. Heating for the homes could be provided by passive geothermal heating units installed underground.","left":"77%","top":"68%"},
+    {"text":"<b><em>Māra Kai</em></b>: A well-tended and lush vegetable garden near the communal kitchen. Members of the marae care for the garden and share its produce across the community. There are rows of drying racks nearby, used to preserve kai moana (seafood such as eel and fish) by dehydrating it in the sun.","left":"89%","top":"78%"},
+    {"text":"<b><em>Kāuta</em></b>: This communal kitchen is used by tangata whenua (home people) to prepare kai (food) for guests. Nearby is the wharekai (dining room), used to welcome the community and guests for informal gatherings. Whare people sit, eat, and whakawhanaungatanga (connect, share stories, and enjoy each others’ company)","left":"71%","top":"78%"},
+    {"text":"<b><em>Kapohau</em></b>: This field is suitable for several small wind turbines.","left":"79%","top":"36%"}
   ],
   "sources": [
     {
