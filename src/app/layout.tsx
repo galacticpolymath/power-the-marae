@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './marae.scss';
 
 export const metadata: Metadata = {
   title: 'Power the Marae',

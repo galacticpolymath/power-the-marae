@@ -35,7 +35,9 @@ const EnergyReport: FC<EnergyReportProps> = ({ energyData, config, totals }) => 
       )}
       <div className="flex flex-col items-start w-[80%] mt-4">
         <ul className="list-disc">
-          <li>You provided {Math.round((totals.totalPowerKWh / 30000) * 100)}% of your community's energy needs.</li>
+          <li>
+            You provided {Math.round((totals.totalPowerKWh / 30000) * 100)}% of your community&apos;s energy needs.
+          </li>
           {totals.budgetExceeded ? (
             <li>But your proposed solution is over budget.</li>
           ) : (
