@@ -6,9 +6,9 @@ import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Punahiko Marae: Energy Independence Game',
+  title: 'Light Up the Marae: Build your own sustainable energy mix',
   description:
-    'Punahiko Marae is an interactive educational game that challenges players to meet the energy needs of a fictional Māori community. Explore renewable energy options like hydroelectric, wind, solar, and geothermal, and learn about energy independence in Aotearoa New Zealand.',
+    'This free web app helps visualise energy mixes, through the lens of Māori communities in Aotearoa New Zealand that have worked toward sustainable energy independence for decades. Provides students anywhere in the world a rich window into how leaders in their countries and communities make decisions about how to source their energy.',
   viewport: 'width=device-width, initial-scale=1.0',
   keywords:
     'Punahiko Marae, educational game, renewable energy, Māori community, energy independence, hydroelectric, solar, wind, geothermal',
