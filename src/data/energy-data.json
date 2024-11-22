@@ -50,12 +50,12 @@
     "baseImageSrcs": [
       {
         "order": 1,
-        "src": "/marae/Marae-App_0003_Color-Layer.png",
+        "src": "/marae/Marae-App_0003_Color-Layer.png"
       },
       {"order": 2, "src": "/marae/Marae-App_0003_Color-Layer.png"},
       {"order": 3, "src": "/marae/Marae-App_0002_Layer-buildings-colored.png"},
       {"order": 4, "src": "/marae/Marae-App_0001_Maori-Clean.png"},
-      {"order": 5, "src": "/marae/Marae-App_0000_Clouds-Clean.png"},
+      {"order": 5, "src": "/marae/Marae-App_0000_Clouds-Clean.png"}
     ],
     "categoryRules": [
       {

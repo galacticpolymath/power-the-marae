@@ -18,6 +18,7 @@ import GameIntroDialog from '@/app/layout/game-intro-dialog';
 import { persistedService } from '@/app/services/persisted-service';
 import EnergyReport from '@/app/visuals/energy-report';
 import Head from 'next/head';
+import MobileScreenDialog from '@/components/dialog/mobileOnlyDialog';
 
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
@@ -38,7 +39,10 @@ export default function Home() {
   const [showIntro, setShowIntro] = useState(persistedService.getItemOrDefault<boolean>('showIntro', true));
   const imagesToRender = useMemo(() => {
     const energySourceImages = dataCalculator.getImagesToRender(energyData, energyConfiguration);
-    return [...energyData.scenarioConfiguration.baseImageSrcs, ...energySourceImages.map((x) => x.src)];
+    return [
+      ...energyData.scenarioConfiguration.baseImageSrcs.map((x) => x.src),
+      ...energySourceImages.map((x) => x.src),
+    ];
   }, [energyData, energyConfiguration]);
   const allImages = energyData.sources.map((source) => source.imageLayers.map((layer) => layer)).flat();
 
@@ -94,23 +98,7 @@ export default function Home() {
         totals: totals,
       }}
     >
-      <Head>
-        <title>Punahiko Marae: Energy Independence Game</title>
-        <meta property="og:title" content="Punahiko Marae: Energy Independence Game" />
-        <meta
-          property="og:description"
-          content="Step into the role of an energy consultant for Punahiko Marae, a fictional Māori community. Design an energy mix using renewable and fossil fuel options, and learn about sustainable energy practices."
-        />
-        <link rel="canonical" href="https://energy-app.galacticpolymath.com/" key="canonical" />
-        <meta property="og:image" content="https://energy-app.galacticpolymath.com/meta.png" />
-        <meta property="og:url" content="https://energy-app.galacticpolymath.com/" />
-        <meta name="twitter:title" content="Punahiko Marae: Energy Independence Game" />
-        <meta
-          name="twitter:description"
-          content="Explore renewable energy options and help a fictional Māori community achieve energy independence in this educational game."
-        />
-        <meta name="twitter:image" content="https://energy-app.galacticpolymath.com/meta.png" />
-      </Head>
+      <MobileScreenDialog />
       <GameIntroDialog
         open={showIntro}
         onOpenChange={() => {
@@ -124,7 +112,7 @@ export default function Home() {
           <div className="w-full flex flex-col">
             <MaraeHeader />
             <MaraeCanvas
-              allImages={[...energyData.scenarioConfiguration.baseImageSrcs.map((x) => ({ src: x })), ...allImages]}
+              allImages={[...energyData.scenarioConfiguration.baseImageSrcs.map((x) => ({ src: x.src })), ...allImages]}
               imagesToRender={imagesToRender}
               circles={circles}
               className="w-full h-auto"

@@ -22,6 +22,12 @@ export const metadata: Metadata = {
   openGraph: {
     locale: 'en_US',
     siteName: 'Punahiko Marae',
+    title: 'Punahiko Marae: Energy Independence Game',
+    description:
+      'Step into the role of an energy consultant for Punahiko Marae, a fictional Māori community. Design an energy mix using renewable and fossil fuel options, and learn about sustainable energy practices.',
+    url: 'https://energy-app.galacticpolymath.com/',
+    type: 'website',
+    images: [{ url: 'https://energy-app.galacticpolymath.com/meta.png', alt: 'Punahiko Marae' }],
   },
   twitter: {
     title: 'Punahiko Marae: Energy Independence Game',
