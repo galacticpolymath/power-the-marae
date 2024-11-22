@@ -189,7 +189,7 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
                   <Info className="rounded-full bg-white text-cyan-500 hover:bg-cyan-200" />
                 </PopoverTrigger>
                 <PopoverContent className="max-w-[20rem] bg-primary text-secondary">
-                  <p className="text-sm">{tip.text}</p>
+                  <p className="text-sm" dangerouslySetInnerHTML={{ __html: tip.text }} />
                 </PopoverContent>
               </Popover>
             ))}
