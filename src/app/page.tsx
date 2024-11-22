@@ -17,6 +17,7 @@ import { EnergyMixStackedBar } from '@/app/visuals/energy-mix-stacked-bar';
 import GameIntroDialog from '@/app/layout/game-intro-dialog';
 import { persistedService } from '@/app/services/persisted-service';
 import EnergyReport from '@/app/visuals/energy-report';
+import Head from 'next/head';
 
 export default function Home() {
   const [energyConfiguration, setEnergyConfiguration] = useState<UserEnergyConfiguration>({});
@@ -93,6 +94,23 @@ export default function Home() {
         totals: totals,
       }}
     >
+      <Head>
+        <title>Punahiko Marae: Energy Independence Game</title>
+        <meta property="og:title" content="Punahiko Marae: Energy Independence Game" />
+        <meta
+          property="og:description"
+          content="Step into the role of an energy consultant for Punahiko Marae, a fictional Māori community. Design an energy mix using renewable and fossil fuel options, and learn about sustainable energy practices."
+        />
+        <link rel="canonical" href="https://energy-app.galacticpolymath.com/" key="canonical" />
+        <meta property="og:image" content="https://energy-app.galacticpolymath.com/meta.png" />
+        <meta property="og:url" content="https://energy-app.galacticpolymath.com/" />
+        <meta name="twitter:title" content="Punahiko Marae: Energy Independence Game" />
+        <meta
+          name="twitter:description"
+          content="Explore renewable energy options and help a fictional Māori community achieve energy independence in this educational game."
+        />
+        <meta name="twitter:image" content="https://energy-app.galacticpolymath.com/meta.png" />
+      </Head>
       <GameIntroDialog
         open={showIntro}
         onOpenChange={() => {
