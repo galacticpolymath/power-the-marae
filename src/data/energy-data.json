@@ -48,10 +48,14 @@
   ],
   "scenarioConfiguration": {
     "baseImageSrcs": [
-      "/marae/Marae-App_0003_Color-Layer.png",
-      "/marae/Marae-App_0002_Layer-buildings-colored.png",
-      "/marae/Marae-App_0001_Maori-Clean.png",
-      "/marae/Marae-App_0000_Clouds-Clean.png"
+      {
+        "order": 1,
+        "src": "/marae/Marae-App_0003_Color-Layer.png",
+      },
+      {"order": 2, "src": "/marae/Marae-App_0003_Color-Layer.png"},
+      {"order": 3, "src": "/marae/Marae-App_0002_Layer-buildings-colored.png"},
+      {"order": 4, "src": "/marae/Marae-App_0001_Maori-Clean.png"},
+      {"order": 5, "src": "/marae/Marae-App_0000_Clouds-Clean.png"},
     ],
     "categoryRules": [
       {
@@ -70,7 +74,7 @@
   },
   "tooltips": [
     {
-      "text": "Wharenui: The large, communal meeting house at the heart of the marae. A sacred place for celebrations, funerals, and other formal meetings, the wharenui is the ancestral home for Māori people.",
+      "text": "<b><em>Wharenui</em></b>: The large, communal meeting house at the heart of the marae. A sacred place for celebrations, funerals, and other formal meetings, the wharenui is the ancestral home for Māori people.",
       "left": "51%",
       "top": "81%"
     },

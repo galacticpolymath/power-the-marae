@@ -2,5 +2,5 @@ import { EnergyCategoryRule } from '@/app/models/energy-category-rule';
 
 export interface EnergyScenarioConfiguration {
   categoryRules: EnergyCategoryRule[];
-  baseImageSrcs: string[];
+  baseImageSrcs: { order: number; src: string }[];
 }
