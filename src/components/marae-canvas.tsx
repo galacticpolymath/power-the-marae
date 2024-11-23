@@ -27,55 +27,43 @@ const MaraeCanvas: React.FC<CanvasProps> = ({ imagesToRender, circles, allImages
 
   useEffect(() => {
     const preloadImages = async () => {
-      const promises = allImages.map((x) => {
-        return new Promise<RenderableImage | null>((resolve) => {
-          if (imageCache.current[x.src]) {
-            // Image is already cached; resolve with it.
-            resolve(imageCache.current[x.src]);
-          } else {
-            const image = new Image();
-            image.src = x.src;
+      const promises = allImages.map(
+        (x) =>
+          new Promise<RenderableImage>((resolve, reject) => {
+            if (imageCache.current[x.src]) {
+              resolve(imageCache.current[x.src]);
+            } else {
+              const image = new Image();
+              image.src = x.src;
+              image.onload = () => {
+                const highlightImage = new Image();
+                highlightImage.src = x.highlightSrc || '';
+                const isInitial = imagesToRender.includes(x.src);
+                const renderableImage = new RenderableImage(
+                  x.src,
+                  image,
+                  x.highlightSrc ? highlightImage : null,
+                  isInitial,
+                );
+                renderableImage.isDrawn = isInitial;
+                imageCache.current[x.src] = renderableImage;
+                resolve(renderableImage);
+              };
+              image.onerror = () => reject();
+            }
+          }),
+      );
+      const images = await Promise.all(promises);
 
-            image.onload = async () => {
-              let highlightImage: HTMLImageElement | null = null;
-
-              if (x.highlightSrc) {
-                highlightImage = new Image();
-                highlightImage.src = x.highlightSrc;
-                // Wait for the highlight image to load
-                await new Promise<void>((res) => {
-                  highlightImage!.onload = () => res();
-                  highlightImage!.onerror = () => res();
-                });
-              }
-
-              const isInitial = imagesToRender.includes(x.src);
-              const renderableImage = new RenderableImage(x.src, image, highlightImage, isInitial);
-              renderableImage.isDrawn = isInitial;
-
-              // Store in cache
-              imageCache.current[x.src] = renderableImage;
-              resolve(renderableImage);
-            };
-
-            image.onerror = () => resolve(null); // Resolve with null on error
-          }
-        });
-      });
-
-      // Wait for all images to load
-      const renderableImages = await Promise.all(promises);
-
-      // Filter out any null values (failed loads)
-      const validRenderableImages = renderableImages.filter((img): img is RenderableImage => img !== null);
-
-      // Set the renderables state with images in correct order
-      setRenderables(validRenderableImages);
+      // Initialize renderables list with all cached images
+      if (renderables.length === 0) {
+        setRenderables(images);
+      }
       setIsBuffering(false);
     };
 
     preloadImages();
-  }, [allImages, imagesToRender]);
+  }, [allImages, imagesToRender, renderables]);
 
   function getCursorPosition(event: MouseEvent<HTMLElement>) {
     // if (!process.env.DEBUG) {
