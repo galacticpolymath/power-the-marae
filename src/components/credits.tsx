@@ -27,9 +27,28 @@ export const Credits = () => {
         </a>
         &nbsp; at the University of Canterbury in Christchurch, Aotearoa New Zealand
       </div>
-      <div className="font-semibold pt-2">Funded by</div>
-      <div>Designed by Madelyn Leembruggen and Matt Wilkins</div>
-      <div className="font-semibold pt-2">Creative and cultural consultants</div>
+      <div className="font-semibold pt-2">Funded by:</div>
+      <div>
+        <a
+          className="underline hover:no-underline"
+          href="https://www.mbie.govt.nz/science-and-technology/science-and-innovation/funding-information-and-opportunities/investment-funds/curious-minds/unlocking-curious-minds-fund/successful-2023-unlocking-curious-minds-contestable-fund-investment-round-proposals"
+          target="_blank"
+        >
+          New Zealand Ministry for Business, Innovation, and Environment: 2024 Unlocking Curious Minds Fund
+        </a>
+        , and
+        <br />
+        <a
+          className="underline hover:no-underline"
+          href="https://www.canterbury.ac.nz/study/academic-study/engineering/schools-and-departments-engineering-forestry-product-design/chemical-and-process-engineering-department"
+          target="_blank"
+        >
+          University of Canterbury: Department of Chemical and Process Engineering
+        </a>
+      </div>
+      <div className="font-semibold pt-2">Designed by:</div>
+      <div>Madelyn Leembruggen and Matt Wilkins</div>
+      <div className="font-semibold pt-2">Creative, engineering, and cultural consultants</div>
       <div>Mel Tainui, Thomas Hamilton, and Andre Konia</div>
       <div className="font-semibold pt-2">Education consultants</div>
       <div>Andre Konia, Ella Houlihan</div>
